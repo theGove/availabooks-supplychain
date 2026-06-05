@@ -555,7 +555,7 @@ calculation <code>4200 / 35</code> represents a productivity figure, but
 writing it alone doesn’t tell the computer to do anything with it. To
 turn it into an instruction, use a statement such as
 <code>console.log()</code>:</p>
-<pre><code>console.log(4200 / 35) // statement: display the result
+<pre class="javascript-example"><code>console.log(4200 / 35) // statement: display the result
                        // 4200 / 35 is just the expression</code></pre>
 <p>This tells the computer to print the result — 120 units per labor
 hour. One instruction, one action. Tiny as it is, this captures the
@@ -566,11 +566,11 @@ class="header-section-number">2.1.2</span> What Makes a Statement
 “Simple”</h3>
 <p>A simple statement usually does one thing — display a value, assign a
 variable, or call a function. For example:</p>
-<pre><code>console.log(12000 / (4500 + 1800 + 900))
+<pre class="javascript-example"><code>console.log(12000 / (4500 + 1800 + 900))
 // output per dollar of input: units divided by (labor + materials + overhead)</code></pre>
 <p>This calculates a multifactor productivity number and displays it.
 Or:</p>
-<pre><code>let unitsPerHour = 4200 / 35</code></pre>
+<pre class="javascript-example"><code>let unitsPerHour = 4200 / 35</code></pre>
 <p>This stores a result for later use without displaying it. Each line
 is a complete thought expressed in code.</p>
 <h3 data-number="2.1.3" id="running-your-first-statements"><span
@@ -582,18 +582,18 @@ expressions back to you, so bare expressions often show a result there
 too.)</p>
 <p>These first two lines are just expressions — on their own they don’t
 instruct the computer to do anything lasting:</p>
-<pre><code>4200 / 35</code></pre>
-<pre><code>&quot;Line A is running&quot;</code></pre>
+<pre class="javascript-example"><code>4200 / 35</code></pre>
+<pre class="javascript-example"><code>&quot;Line A is running&quot;</code></pre>
 <p>This is a true, simple statement:</p>
-<pre><code>console.log(120 * 8) // units per hour times hours in the shift</code></pre>
+<pre class="javascript-example"><code>console.log(120 * 8) // units per hour times hours in the shift</code></pre>
 <p>Now compare these two lines:</p>
-<pre><code>let unitsPerHour = 120
+<pre class="javascript-example"><code>let unitsPerHour = 120
 unitsPerHour</code></pre>
 <p>Line one is a statement — it assigns 120 to
 <code>unitsPerHour</code>. Line two is just an expression: the computer
 can see that the value is 120, but you haven’t told it what to do with
 that fact. Make line two a statement and the value gets used:</p>
-<pre><code>let unitsPerHour = 120
+<pre class="javascript-example"><code>let unitsPerHour = 120
 console.log(unitsPerHour)</code></pre>
 <p>Each statement runs immediately, giving instant feedback. That
 write-run-observe loop is one of the best ways to learn.</p>
@@ -625,7 +625,7 @@ constantly. It sends a message to the console — a built-in panel where
 JavaScript can display information. Think of it as your program’s voice:
 whenever you want to check a value or confirm a calculation, you log
 it.</p>
-<pre><code>console.log(&quot;Units per labor hour:&quot;, 4200 / 35)</code></pre>
+<pre class="javascript-example"><code>console.log(&quot;Units per labor hour:&quot;, 4200 / 35)</code></pre>
 <h3 data-number="2.2.1" id="why-console.log-matters"><span
 class="header-section-number">2.2.1</span> Why
 <code>console.log()</code> Matters</h3>
@@ -638,7 +638,7 @@ most important tools you’ll use while learning.</p>
 class="header-section-number">2.2.2</span> Logging Different Kinds of
 Values</h3>
 <p>You can log almost anything:</p>
-<pre><code>console.log(4200)               // numbers (units produced)
+<pre class="javascript-example"><code>console.log(4200)               // numbers (units produced)
 console.log(&quot;Line A&quot;)           // strings (a work center name)
 console.log(120 &gt; 100)          // booleans (did we beat target?)
 console.log(4200 / 35)          // expressions (a productivity ratio)</code></pre>
@@ -647,7 +647,7 @@ Use comments to note what a line does, record your reasoning, or
 temporarily disable code you don’t want to run but don’t want to
 delete.</p>
 <p>You can also log several values at once:</p>
-<pre><code>console.log(&quot;Productivity:&quot;, 4200 / 35, &quot;units/hour&quot;)</code></pre>
+<pre class="javascript-example"><code>console.log(&quot;Productivity:&quot;, 4200 / 35, &quot;units/hour&quot;)</code></pre>
 <p>The console prints the label and the result together, which makes the
 output easy to read.</p>
 <h3 data-number="2.2.3" id="using-the-console-in-your-browser"><span
@@ -684,7 +684,7 @@ and a programming language is no different. You’ll misspell a name, drop
 a parenthesis, or use a feature wrong. Treat errors as feedback — they
 point straight at what needs attention. A typical message looks
 like:</p>
-<pre><code>Uncaught ReferenceError: laborHours is not defined</code></pre>
+<pre class="javascript-example"><code>Uncaught ReferenceError: laborHours is not defined</code></pre>
 <p>Intimidating at first, but with practice you’ll read these like
 clues.</p>
 <h3 data-number="2.3.2" id="types-of-errors-youll-see"><span
@@ -711,7 +711,7 @@ class="header-section-number">2.3.3</span> Reading Error Messages</h3>
 <p>Messages feel cryptic until you know they usually tell you three
 things: what went wrong, where it happened (a line number), and why the
 computer couldn’t continue. For example:</p>
-<pre><code>Uncaught SyntaxError: Unexpected token &#39;}&#39;</code></pre>
+<pre class="javascript-example"><code>Uncaught SyntaxError: Unexpected token &#39;}&#39;</code></pre>
 <p>This says the computer found a closing brace it didn’t expect —
 usually a sign something earlier is missing.</p>
 <h3 data-number="2.3.4" id="debugging-your-first-toolkit"><span
@@ -745,10 +745,10 @@ class="header-section-number">2.4.1</span> Why Syntax Matters</h3>
 in gaps. Forget a parenthesis or misspell a keyword and the machine
 stops and reports an error, because the instruction no longer fits the
 expected pattern. This is valid:</p>
-<pre><code>console.log(&quot;Above target&quot;)</code></pre>
+<pre class="javascript-example"><code>console.log(&quot;Above target&quot;)</code></pre>
 <p>Remove one character and the computer no longer knows where the
 statement ends:</p>
-<pre><code>console.log(&quot;Above target&quot;</code></pre>
+<pre class="javascript-example"><code>console.log(&quot;Above target&quot;</code></pre>
 <p>A person might overlook the missing parenthesis; the computer can’t.
 Syntax rules create a predictable structure both you and the machine can
 rely on.</p>
@@ -771,7 +771,7 @@ Together</h3>
 <p>Where syntax governs the details, structure governs the big picture —
 organizing code so it’s readable and logical. JavaScript uses
 <strong>curly braces</strong> to group related statements:</p>
-<pre><code>if (unitsPerHour &gt; target) {
+<pre class="javascript-example"><code>if (unitsPerHour &gt; target) {
   console.log(&quot;Above target&quot;)
   console.log(&quot;Keep the line running&quot;)
 }</code></pre>
@@ -791,7 +791,7 @@ it understandable. A simple way to communicate clearly is to comment
 your code, especially the complicated parts. Explain what each section
 does and it’ll be far easier to follow when you return to it months
 later:</p>
-<pre><code>// Flag the line as above target and worth keeping running
+<pre class="javascript-example"><code>// Flag the line as above target and worth keeping running
 // only when its productivity beats the target rate.
 if (unitsPerHour &gt; target) {
   console.log(&quot;Above target&quot;)
@@ -839,7 +839,6 @@ to playing your first song: the fundamentals stay the same, but now you
 build something meaningful. The next chapter takes you into Sheets,
 shows you how to open the Apps Script editor, and helps you write your
 first script that touches real data.</p>
-<hr />
 <!--postEnd-->
               </div>
 </div>
