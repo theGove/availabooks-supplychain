@@ -1,3 +1,9 @@
 {
-  "blogUrl":"book1011.blogspot.com"
+  "blogUrl":"book1011.blogspot.com",
+  "title": "Supply Chain System Analysis and Modeling",
+  "authors": [
+     "Gove Allen",
+     "John Chapman"
+   ],
+   "chapterLabel": "Chapter"  
 }

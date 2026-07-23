@@ -18,12 +18,44 @@
 <style id='page-skin-1' type='text/css'><!--
 :root {
 --font-zoom: 1;
+--page-bg: #f8fafc;
+--surface: #ffffff;
+--surface-soft: #f1f5f9;
+--surface-muted: #e2e8f0;
+--text: #172033;
+--text-muted: #64748b;
+--heading: #0f172a;
+--accent: #2563eb;
+--accent-strong: #1d4ed8;
+--accent-soft: #dbeafe;
+--danger: #dc2626;
+--warning: #fef3c7;
+--border: #dbe3ee;
+--shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+--shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+--shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.18);
+--radius-sm: 0.5rem;
+--radius-md: 0.85rem;
+--radius-lg: 1.35rem;
+}
+* {
+box-sizing: border-box;
+}
+html {
+scroll-behavior: smooth;
 }
 body {
-font-family: "Verdana", "Open Sans", "Roboto", "Helvetica Neue", Arial, sans-serif;
-font-weight: 300;
+margin: 0;
+min-height: 100vh;
+font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+font-weight: 400;
 font-style: normal;
 font-size: calc(1rem  * var(--font-zoom));
+line-height: 1.72;
+color: var(--text);
+background: var(--page-bg);
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
 }
 .module{
 display:none
@@ -37,10 +69,10 @@ cursor:pointer;
 user-select:none;
 }
 summary::marker {
-color: #888;
+color: var(--text-muted);
 }
 #msg-galley{
-position:fixed;gf
+position:fixed;
 top:0;
 right:0;
 height:100vh;
@@ -49,10 +81,10 @@ max-width:50%;
 z-index:12;
 background-color: transparent;
 pointer-events: none;
-padding: .5rem .5rem 0 0;
-font-family: "Roboto", serif;
+padding: 1rem 1rem 0 0;
+font-family: "Roboto", sans-serif;
 font-optical-sizing: auto;
-font-weight: 300;
+font-weight: 400;
 font-style: normal;
 font-variation-settings: "wdth" 100;
 }
@@ -60,42 +92,47 @@ font-variation-settings: "wdth" 100;
 position:absolute;
 top:calc(3px  * var(--font-zoom));
 right:calc(3px  * var(--font-zoom));
-padding:.05rem;
-background-color:red;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 1.25rem;
+height: 1.25rem;
+padding: 0;
+background-color:var(--danger);
 color: white;
-font-weight:500;
-font-size:calc(.5rem  * var(--font-zoom));
-height:calc(1rem  * var(--font-zoom));
+font-weight:700;
+font-size:calc(.7rem  * var(--font-zoom));
+border-radius: 999px;
 cursor:pointer;
 }
 .msg-dialog{
 position: relative;
-background-color:#eee;
-margin-bottom:.5rem;
+background-color:var(--surface);
+margin-bottom:.75rem;
 pointer-events: auto;
-border-radius:5px;
-border: 1px solid black;
+border-radius:var(--radius-md);
+border: 1px solid var(--border);
+box-shadow: var(--shadow-md);
+overflow: hidden;
 }
 .msg-button-{
 margin: 0 .5rem .5rem 0;
 }
 .msg-button-bar{
-background-color:#ddd;
+background-color:var(--surface-soft);
 text-align:center;
-padding:.5rem .5rem .5rem;
-border-radius:0 0 5px 5px;
+padding:.75rem;
+border-top: 1px solid var(--border);
 }
 .msg-title{
-background-color:darkblue;
-color:#eee;
-font-weight:500;
-border-radius:5px 5px 0 0;
-padding-left:.5rem;
+background:var(--accent);
+color:white;
+font-weight:700;
+padding:.55rem 2rem .55rem .85rem;
 }
 .msg-message{
-background-color:#eee;
-padding: .5rem;
-border-radius:0 0 5px 5px;
+background-color:var(--surface);
+padding: .85rem;
 }
 #page-data{
 display:none
@@ -105,70 +142,131 @@ top:0;
 left:-100px;
 position:fixed;
 display:none;
-background-color:#eee;
+background:var(--surface);
 padding:0;
 z-index:11;
-transition: .3s;
+transition: left .25s ease, box-shadow .25s ease;
 height:100vh;
-min-width:20vw;
+min-width:min(22rem, 88vw);
 max-width:75vw;
 overflow: auto;
+border-right: 1px solid var(--border);
+box-shadow: var(--shadow-lg);
 }
 #book-data{display:none}
 #menu-content{
-padding:.6rem;
+padding:1rem 1.25rem 2rem;
 }
 .menu-button{
-padding:.2rem 1rem 0 .5rem;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-width:2.4rem;
+height:2.4rem;
+padding:0 .6rem;
 cursor:pointer;
-color:#888;
+color:var(--text-muted);
+border-radius:999px;
+transition: background .18s ease, color .18s ease, transform .18s ease;
+vertical-align:middle;
+}
+.menu-button:hover{
+background:var(--accent-soft);
+color:var(--accent-strong);
+transform: translateY(-1px);
 }
 .menu-header{
 top:0;
 position:sticky;
-background-color:#eee;
+background:var(--surface);
 opacity:1;
 margin:0;
+padding:.45rem .6rem;
+border-bottom:1px solid var(--border);
+box-shadow: var(--shadow-sm);
+z-index:1;
+}
+#book-title{
+font-weight:700;
+letter-spacing:.02em;
 }
 #search-div{
-width:200px;
+width:100%;
 white-space: nowrap;
+margin-top: 1.5rem;
 }
 #search-div h6{
-margin:1rem 0 0 0;
-font-size:14px;
+margin:0 0 .45rem 0;
+font-size:.78rem;
+font-weight:700;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:var(--text-muted);
+}
+#search{
+width: calc(100% - 2.25rem);
+border:1px solid var(--border);
+border-radius:999px;
+padding:.55rem .85rem;
+font: inherit;
+font-size:.92rem;
+color:var(--text);
+background:var(--surface);
+box-shadow: var(--shadow-sm);
+outline:none;
+transition: border-color .18s ease, box-shadow .18s ease;
+}
+#search:focus{
+border-color:var(--accent);
+box-shadow:0 0 0 4px rgba(37, 99, 235, .13);
 }
 #search-button{
-padding-left:0;
+padding-left:.45rem;
+color:var(--accent);
+vertical-align:middle;
 }
 #search-results{
-font-size:12px;
+font-size:.86rem;
+margin-top: .85rem;
 }
 .search-result{
-margin-top:10px;
-padding:5px;
+margin-top:.65rem;
+padding:.75rem;
 cursor:pointer;
+border:1px solid var(--border);
+border-radius:var(--radius-sm);
+background:var(--surface);
+box-shadow: var(--shadow-sm);
+transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 .search-result:hover{
-background-color:white;
+background-color:#f8fbff;
+border-color:#bfdbfe;
+box-shadow:0 10px 24px rgba(37, 99, 235, .1);
+transform: translateY(-1px);
 }
 .search-result-title{
 font-weight:bold;
+color:var(--heading);
 }
 .search-result-line{
-margin:0 0 5px 10px;
+margin:.25rem 0 .35rem .75rem;
+color:var(--text-muted);
 }
 .search-term{
-background-color:yellow;
+background-color:var(--warning);
+border-radius:.2rem;
+padding:0 .15rem;
 }
 .chapter-result-link{
-color:black;
+color:var(--heading);
 }
 .toc-section-container{
-margin-left:.6rem;
+margin-left:.75rem;
 }
 .toc-text-container{
-margin-left:1.6rem;
+margin-left:1.25rem;
+color:var(--text-muted);
 }
 .chapter-section{
 margin-top: calc(3rem  * var(--font-zoom));
@@ -179,61 +277,84 @@ display:none
 }
 img{
 max-width:100%;
+height:auto;
+border-radius:var(--radius-md);
 }
 .entry-header{
 position:fixed;
 top:0;
 left: 0;
 width: 100%;
-transition:all 0.1s;
-padding: .1rem;
+transition:opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+padding: .35rem .75rem;
 -webkit-user-select: none; /* Safari */
 user-select: none; /* Standard syntax */
-background: rgba(200, 200, 200, 1.0);
+background: var(--surface);
+border-bottom:1px solid var(--border);
+box-shadow:var(--shadow-sm);
 z-index:10;
 }
 button.nav{
-border-radius:5px;
+border-radius:999px;
+border:1px solid var(--border);
+background:var(--surface);
+color:var(--accent);
+box-shadow: var(--shadow-md);
+width:2.8rem;
+height:2.8rem;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
 }
 .nav{
 position: fixed;
-bottom: 5px;
+bottom: 1rem;
 opacity:1.0;
-transition:all 0.6s;
+transition:opacity 0.35s ease, transform 0.18s ease, box-shadow 0.18s ease;
 pointer-events: all;
 }
+.nav:hover{
+transform: translateY(-2px);
+box-shadow: var(--shadow-lg);
+}
 .dim-button:hover{opacity: 1.0;}
-.dim-button{opacity: .2;}
+.dim-button{opacity: .35;}
 .dim-header:hover{opacity: 1.0;}
 .dim-header{opacity: 0;}
 #prior-button {
-left: 5px;
+left: 1rem;
 }
 #next-button {
-right: 5px;
+right: 1rem;
 }
 .span-link{
 cursor:pointer;
-color:green;
+color:var(--accent);
+font-weight:500;
 }
 .span-link:hover{
 text-decoration: underline;
-color:blue;
+color:var(--accent-strong);
 }
-a:link {color: green; text-decoration:none}
-a:visited {color: green;}
-a:hover {background-color: #ddd;}
-a:active {color: green;}
+a:link {color: var(--accent); text-decoration:none}
+a:visited {color: #4f46e5;}
+a:hover {background-color: var(--accent-soft); color: var(--accent-strong); border-radius:.25rem;}
+a:active {color: var(--accent-strong);}
 .book-title{
-margin-top: 5rem;
-font-size:calc(3rem  * var(--font-zoom));
+margin-top: 6rem;
+font-family:"Taviraj", Georgia, serif;
+font-size:clamp(2.4rem, 7vw, calc(4rem  * var(--font-zoom)));
+line-height:1.05;
 text-align: center;
-font-weight: bold;
+font-weight: 700;
+color:var(--heading);
 }
 .book-author{
-margin-top: 2rem;
-font-size:calc(2rem  * var(--font-zoom));
+margin-top: 1rem;
+font-size:calc(1.45rem  * var(--font-zoom));
 text-align: center;
+color:var(--text-muted);
 }
 .book-toc{
 text-align: center;
@@ -246,41 +367,68 @@ display: inline-block;
 text-align:left;
 padding-left: 1rem;
 text-indent: -1rem;
-margin-bottom: 0.3rem;
+margin-bottom: 0.55rem;
 }
 .tool {
 cursor:pointer;
 font-size:calc(18px  * var(--font-zoom));
-font-weight:300;
+font-weight:400;
 vertical-align: middle;
 padding-left:.6rem;
-color:#666;
+color:var(--text-muted);
+transition: color .18s ease, transform .18s ease;
+}
+.tool:hover {
+color:var(--accent);
+transform: translateY(-1px);
 }
 .lead-in{
 margin-top:4rem;
 }
 .example, .indent, .category{
-margin:1rem 0 0 1rem;
+margin:1rem 0 0 1.1rem;
 }
 .category div:first-child{
-color:red;
+color:var(--danger);
+font-weight:700;
 }
 .example div:first-child{
-color:red;
+color:var(--danger);
 font-style: italic;
 }
 h1{
-font-size:1.5rem;
-color:#333;
+font-family:"Taviraj", Georgia, serif;
+font-size:clamp(1.35rem, 4vw, calc(2.1rem * var(--font-zoom)));
+line-height:1.18;
+color:var(--heading);
+font-weight:700;
+margin:0;
 }
 h2, h3{
-color:darkred;
+font-family:"Taviraj", Georgia, serif;
+color:var(--heading);
+line-height:1.24;
+letter-spacing:-.015em;
+}
+h2{
+font-size:clamp(1.55rem, 4vw, calc(2.15rem * var(--font-zoom)));
+margin:3rem 0 1rem;
+padding-top:.5rem;
+}
+h3{
+font-size:clamp(1.2rem, 3vw, calc(1.45rem * var(--font-zoom)));
+margin:2.25rem 0 .8rem;
+}
+.header-section-number{
+color:var(--accent);
+font-weight:700;
 }
 p{
 margin-top:0;
+margin-bottom:1.15rem;
 }
 p.vignette{
-color:red
+color:var(--danger)
 }
 .no-dot{
 list-style-type: none;
@@ -292,45 +440,166 @@ margin-bottom: 0.3rem;
 }
 audio{
 height:30px;
+width:100%;
+max-width:34rem;
 }
 div.post-body{
-max-width:900px;
+max-width:940px;
 margin:0 auto;
-padding:1rem;
-background-color:white;
-padding-top:2rem;
+padding:clamp(5.2rem, 7vw, 6.25rem) clamp(1.15rem, 4vw, 3.5rem) 4rem;
+background:transparent;
 }
 div.index-boxnbt{
-background-color:#eee;
+background:var(--surface);
+padding-bottom:2rem;
 }
 .material-symbols-outlined {
 font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
 font-size: 18px;
 line-height: 1;
 }
+blockquote{
+margin:1.75rem 0;
+padding:1rem 1.25rem 1rem 1.35rem;
+background:var(--surface-soft);
+border-left:.35rem solid var(--accent);
+border-radius:0 var(--radius-md) var(--radius-md) 0;
+color:#334155;
+}
+blockquote p:last-child{
+margin-bottom:0;
+}
+hr{
+height:1px;
+border:0;
+background:var(--border);
+margin:2.75rem 0;
+}
+ul, ol{
+padding-left:1.45rem;
+margin:0 0 1.25rem;
+}
+li{
+margin:.45rem 0;
+}
+code{
+font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+font-size:.92em;
+color:#0f766e;
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+border-radius:.35rem;
+padding:.08rem .32rem;
+}
+pre code,
+.sourceCode code{
+color:inherit;
+background:transparent;
+border:0;
+border-radius:0;
+padding:0;
+font-size:inherit;
+}
+pre,
+pre.javascript-code,
+pre.javascript-example,
+pre.spreadsheet,
+div.sourceCode pre{
+margin:1rem 0;
+padding:.75rem .85rem;
+overflow:auto;
+background:#0f172a;
+color:#dbeafe;
+border:1px solid rgba(148, 163, 184, .28);
+border-radius:var(--radius-md);
+box-shadow:var(--shadow-md);
+font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+font-size:.88rem;
+line-height:1.38;
+tab-size:2;
+white-space:pre;
+}
+div.sourceCode{
+margin:1rem 0;
+}
+div.sourceCode pre{
+margin:0;
+}
+.sourceCode .kw,
+.sourceCode .cf{
+color:#93c5fd;
+}
+.sourceCode .fu,
+.sourceCode .at{
+color:#67e8f9;
+}
+.sourceCode .st{
+color:#86efac;
+}
+.sourceCode .dv{
+color:#fbbf24;
+}
+.sourceCode .co{
+color:#94a3b8;
+font-style:italic;
+}
+table{
+display:block;
+width:max-content;
+max-width:100%;
+border-collapse:separate;
+border-spacing:0;
+margin:1.5rem 0 2rem;
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+border:1px solid var(--border);
+border-radius:var(--radius-md);
+box-shadow:var(--shadow-sm);
+background:var(--surface);
+}
+th,
+td{
+padding:.72rem .85rem;
+border-bottom:1px solid var(--border);
+text-align:left;
+vertical-align:top;
+white-space:nowrap;
+}
+th{
+font-size:.86rem;
+font-weight:700;
+color:var(--heading);
+background:var(--surface-soft);
+}
+tr:last-child td{
+border-bottom:0;
+}
+tr:nth-child(even) td{
+background:#f8fafc;
+}
 .monaco {
 width: 100%;
-margin: 1.25rem 0;
-border-radius: 10px;
+margin: 1.5rem 0;
+border-radius: var(--radius-md);
 overflow: hidden;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-border: 1px solid rgba(255, 255, 255, 0.06);
+box-shadow: var(--shadow-lg);
+border: 1px solid rgba(148, 163, 184, 0.22);
 }
 .monaco-bar {
 display: flex;
 align-items: center;
 justify-content: flex-end;
 gap: 2px;
-padding: 6px 10px;
-background: #2d2d2d;
+padding: 8px 10px;
+background: linear-gradient(180deg, #1f2937, #111827);
 border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .monaco-bar-label {
 flex: 1;
-font-family: 'Inter', sans-serif;
+font-family: "Roboto", sans-serif;
 font-size: 11px;
-font-weight: 500;
-color: #6e7681;
+font-weight: 700;
+color: #94a3b8;
 letter-spacing: 0.5px;
 text-transform: uppercase;
 padding-left: 4px;
@@ -413,12 +682,43 @@ font-size: 15px;
 pre.code {
 color: #a8ff78;
 background: #0d1117;
-padding: 12px 16px;
-margin: 1.25rem 0;
+padding: 1rem 1.15rem;
+margin: 1.35rem 0;
 font-size: 14px;
-border-radius: 8px;
+border-radius: var(--radius-md);
 border: 1px solid rgba(255, 255, 255, 0.07);
 overflow-x: auto;
+}
+@media (max-width: 700px) {
+body {
+font-size: calc(.98rem * var(--font-zoom));
+}
+#msg-galley {
+left: 0;
+right: 0;
+max-width: none;
+min-width: 0;
+padding: .75rem;
+}
+#menu {
+max-width: 92vw;
+}
+.entry-header {
+padding: .25rem .4rem;
+}
+div.post-body {
+padding-left: 1rem;
+padding-right: 1rem;
+}
+.nav {
+bottom: .75rem;
+}
+#prior-button {
+left: .75rem;
+}
+#next-button {
+right: .75rem;
+}
 }
 
 --></style>
@@ -482,7 +782,7 @@ overflow-x: auto;
     }    
 
   </script>
-<link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1676106165289640444&amp;zx=a6871b92-6a78-4e24-9444-f6b49cd57831' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1676106165289640444&amp;zx=a6871b92-6a78-4e24-9444-f6b49cd57831' rel='stylesheet'/></noscript>
+<link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1676106165289640444&amp;zx=71a99a4d-176b-4977-a83e-ca80eb55da2a' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1676106165289640444&amp;zx=71a99a4d-176b-4977-a83e-ca80eb55da2a' rel='stylesheet'/></noscript>
 <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
 <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 
@@ -527,94 +827,92 @@ overflow-x: auto;
 <h1 data-number="5" id="making-decisions"><span
 class="header-section-number">5</span> Making Decisions</h1>
 <h2 data-number="5.1" id="if-else-if-else"><span
-class="header-section-number">5.1</span> <code>if</code>,
-<code>else if</code>, <code>else</code></h2>
+class="header-section-number">5.1</span> if, else if, else</h2>
 <p>Programs become truly useful when they can make decisions. Instead of
 running the same instructions every time, your code can choose different
-paths depending on the situation&#8212;just like you do in everyday life. In
-JavaScript and Google Apps Script, the primary tool for decision&#8209;making
+paths depending on the situation &#8212; just as you do in everyday life. In
+JavaScript and Google Apps Script, the primary tool for decision-making
 is the <strong>if statement</strong>.</p>
+<p>We&#8217;re still at the BYU-Idaho University Store from the last chapter,
+but now the question has changed. We know <em>how many</em> clickers to
+order at a time (the EOQ of 479). The new questions are <em>when</em> to
+place that order, and which of the store&#8217;s many items deserve the
+closest attention. Both turn out to be decisions of the same shape:
+compare the situation to a threshold, and act on the answer. The
+clicker&#8217;s threshold is its <strong>reorder point</strong> &#8212; about 12
+clickers sell per day, and a delivery takes about 10 days to arrive, so
+roughly 120 sell while we wait; add a 30-unit cushion for weeks that run
+hot and the reorder point is 150. (That cushion is &#8220;safety stock,&#8221; and
+pinning it down precisely takes demand variability we&#8217;ll reach later;
+for now, 150 is the number to beat.)</p>
 <p>Think of <code>if</code>, <code>else if</code>, and <code>else</code>
-as a branching path. Your program checks a condition, and based on
-whether it&#8217;s true or false, it decides what to do next.</p>
+as a branching path. Your program checks a condition and, based on
+whether it&#8217;s true or false, decides what to do next.</p>
 <h3 data-number="5.1.1" id="the-basic-if-statement"><span
 class="header-section-number">5.1.1</span> The Basic <code>if</code>
 Statement</h3>
 <p>An <code>if</code> statement checks a condition. If the condition is
 <strong>true</strong>, the code inside the block runs. If it&#8217;s
 <strong>false</strong>, the block is skipped.</p>
-<pre class="code"> 
-let score = 85
+<pre class="javascript-example"><code>let onHand = 120
 
-if (score > 70) {
-  console.log("You passed!")
-}
-</pre>
-<p>Here, the message prints only if the condition
-<code>score &gt; 70</code> is true.</p>
+if (onHand &lt;= 150) {
+  console.log(&quot;Time to reorder&quot;)
+}</code></pre>
+<p>Here the message prints only if <code>onHand &lt;= 150</code> &#8212; the
+reorder point. Because 120 is at or below 150, it does: the clickers
+have dropped far enough that it&#8217;s time to order.</p>
 <h3 data-number="5.1.2" id="adding-more-options-with-else-if"><span
 class="header-section-number">5.1.2</span> Adding More Options With
 <code>else if</code></h3>
-<p>Sometimes one condition isn&#8217;t enough. You may want to check multiple
+<p>Sometimes one condition isn&#8217;t enough. You may want to check several
 possibilities in order. That&#8217;s where <code>else if</code> comes in.</p>
-<pre class="code" > 
-let temperature = 65
+<pre class="javascript-example"><code>let onHand = 220
 
-if (temperature > 80) {
-  console.log("It's hot outside.")
-} else if (temperature > 60) {
-  console.log("It's warm outside.")
-}
-</pre>
+if (onHand &lt;= 150) {
+  console.log(&quot;Reorder now&quot;)
+} else if (onHand &lt;= 300) {
+  console.log(&quot;Getting low &#8212; keep an eye on it&quot;)
+}</code></pre>
 <p>The program checks the first condition. If it&#8217;s false, it moves on to
-check the next one. Only the block of code associated with the first
-condition that evaluates to &#8220;true&#8221; runs.</p>
+the next. Only the block tied to the first condition that evaluates to
+true runs.</p>
 <h3 data-number="5.1.3" id="catching-everything-else-with-else"><span
 class="header-section-number">5.1.3</span> Catching Everything Else With
 <code>else</code></h3>
 <p>The <code>else</code> block runs when none of the previous conditions
-evaluate to true. It&#8217;s your &#8220;fallback&#8221; option.</p>
-<pre class="code" > 
-let temperature = 45
+are true. It&#8217;s your fallback.</p>
+<pre class="javascript-example"><code>let onHand = 480
 
-if (temperature > 80) {
-  console.log("It's hot outside.")
-} else if (temperature > 60) {
-  console.log("It's warm outside.")
+if (onHand &lt;= 150) {
+  console.log(&quot;Reorder now&quot;)
+} else if (onHand &lt;= 300) {
+  console.log(&quot;Getting low &#8212; keep an eye on it&quot;)
 } else {
-  console.log("It's cold outside.")
-}
-</pre>
-<p>This structure ensures that exactly one message prints, no matter
-what the temperature is.</p>
+  console.log(&quot;Stock is healthy&quot;)
+}</code></pre>
+<p>This structure guarantees that exactly one message prints, whatever
+the stock level.</p>
 <h3 data-number="5.1.4" id="how-this-applies-in-apps-script"><span
 class="header-section-number">5.1.4</span> How This Applies in Apps
 Script</h3>
-<p>Decision&#8209;making becomes especially powerful when you&#8217;re working with
-spreadsheet data. For example, you might:</p>
-<ul>
-<li>Check whether a cell is empty</li>
-<li>Decide whether a value meets a threshold</li>
-<li>Categorize data into groups</li>
-<li>Trigger different actions based on user input</li>
-</ul>
-<p>Here&#8217;s a simple example that reads a number from cell A1 and writes a
-message into B1 based on the value:</p>
-<pre class="code"> 
-function checkValue() {
+<p>Decision-making becomes especially powerful with spreadsheet data.
+You might check whether a cell is empty, decide whether a value crosses
+a threshold, sort items into groups, or trigger different actions.
+Here&#8217;s a script that reads an item&#8217;s on-hand quantity from cell A1 and
+writes a status into B1:</p>
+<pre class="javascript-example"><code>function checkStock() {
   let sheet = SpreadsheetApp.getActiveSheet()
-  let value = sheet.getRange("A1").getValue()
+  let onHand = sheet.getRange(&quot;A1&quot;).getValue()
 
-
-  if (value > 100) {
-    sheet.getRange("B1").setValue("High")
-  } else if (value > 50) {
-    sheet.getRange("B1").setValue("Medium")
+  if (onHand &lt;= 150) {
+    sheet.getRange(&quot;B1&quot;).setValue(&quot;Reorder now&quot;)
+  } else if (onHand &lt;= 300) {
+    sheet.getRange(&quot;B1&quot;).setValue(&quot;Getting low&quot;)
   } else {
-    sheet.getRange("B1").setValue("Low")
+    sheet.getRange(&quot;B1&quot;).setValue(&quot;Healthy&quot;)
   }
-}
-</pre>
+}</code></pre>
 <p>This is the heart of automation: your script looks at real data and
 responds intelligently.</p>
 <h3 data-number="5.1.5" id="why-if-statements-matter"><span
@@ -622,41 +920,28 @@ class="header-section-number">5.1.5</span> Why <code>if</code>
 Statements Matter</h3>
 <p>With <code>if</code>, <code>else if</code>, and <code>else</code>,
 your programs stop being static and start becoming <em>smart</em>. They
-can:</p>
-<ul>
-<li>React to changing data</li>
-<li>Choose between multiple actions</li>
-<li>Validate input</li>
-<li>Control the flow of your script</li>
-<li>Make your spreadsheet tools feel dynamic and responsive</li>
-</ul>
-<p>These decision&#8209;making tools are the foundation for everything from
-simple checks to complex logic. In the next sections, you&#8217;ll learn how
-to combine conditions, compare values, and build more sophisticated
-decision structures that bring your Apps Script projects to life.</p>
+can react to changing stock, choose between actions, validate input,
+control the flow of a script, and make your spreadsheet tools feel
+responsive. These decision-making tools are the foundation for
+everything from simple checks to complex policy. Next, you&#8217;ll learn to
+combine conditions, compare values, and build more sophisticated
+decisions.</p>
 <h2 data-number="5.2" id="comparison-and-logical-operators"><span
 class="header-section-number">5.2</span> Comparison and Logical
 Operators</h2>
-<p>Decision&#8209;making in JavaScript depends on evaluating
-conditions&#8212;questions your program asks to decide what to do next. To
-express those questions, you use <strong>comparison operators</strong>
-and <strong>logical operators</strong>. These tools let your code
-compare values, combine conditions, and determine whether something is
-true or false. Once you understand them, your <code>if</code> statements
-become far more powerful and expressive.</p>
+<p>Decision-making depends on evaluating conditions &#8212; questions your
+program asks to decide what to do next. To express those questions, you
+use <strong>comparison operators</strong> and <strong>logical
+operators</strong>. They let your code compare values, combine
+conditions, and determine whether something is true or false. Once you
+understand them, your <code>if</code> statements become far more
+expressive.</p>
 <h3 data-number="5.2.1" id="comparison-operators"><span
 class="header-section-number">5.2.1</span> Comparison Operators</h3>
-<p>Comparison operators check how two values relate to each other. They
-always produce a <strong>boolean</strong> result: either
-<code>true</code> or <code>false</code>.</p>
-<p>Here are the most common ones:</p>
+<p>Comparison operators check how two values relate. They always produce
+a <strong>boolean</strong> &#8212; either <code>true</code> or
+<code>false</code>. The most common ones:</p>
 <table>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 31%" />
-<col style="width: 35%" />
-<col style="width: 23%" />
-</colgroup>
 <thead>
 <tr>
 <th>Operator</th>
@@ -669,26 +954,26 @@ always produce a <strong>boolean</strong> result: either
 <tr>
 <td><code>===</code></td>
 <td>equal to (strict)</td>
-<td><code>5 === 5 4 === 5 "5" === 5</code></td>
-<td><code>true false false</code></td>
+<td><code>5 === 5</code></td>
+<td><code>true</code></td>
 </tr>
 <tr>
 <td><code>!==</code></td>
 <td>not equal to (strict)</td>
-<td><code>5 !== 5 4 !== 5 "5" !== 5</code></td>
-<td><code>false true true</code></td>
+<td><code>4 !== 5</code></td>
+<td><code>true</code></td>
 </tr>
 <tr>
 <td><code>==</code></td>
 <td>equal to (loose)</td>
-<td><code>5 == 5 4 == 5 "5" == 5</code></td>
-<td><code>true false true</code></td>
+<td><code>"5" == 5</code></td>
+<td><code>true</code></td>
 </tr>
 <tr>
 <td><code>!=</code></td>
 <td>not equal to (loose)</td>
-<td><code>5 != 5 4 != 5 "5" != 5</code></td>
-<td><code>false true false</code></td>
+<td><code>5 != 5</code></td>
+<td><code>false</code></td>
 </tr>
 <tr>
 <td><code>&gt;</code></td>
@@ -712,104 +997,169 @@ always produce a <strong>boolean</strong> result: either
 <td><code>&lt;=</code></td>
 <td>less than or equal to</td>
 <td><code>4 &lt;= 2</code></td>
-<td><code>False</code></td>
+<td><code>false</code></td>
 </tr>
 </tbody>
 </table>
 <p>The <strong>strict</strong> operators (<code>===</code> and
-<code>!==</code>) are generally recommended over the
-<strong>loose</strong> operators (<code>==</code> and <code>!=</code>)
-because they compare both value <em>and</em> type. They help you avoid
+<code>!==</code>) are generally preferred over the
+<strong>loose</strong> ones (<code>==</code> and <code>!=</code>)
+because they compare both value <em>and</em> type, helping you avoid
 subtle bugs.</p>
-<p>Example:</p>
-<pre class="code"> 
-let age = 18
+<p>For the reorder decision, the operator that matters is
+<code>&lt;=</code>:</p>
+<pre class="javascript-example"><code>let onHand = 140
 
-if (age >= 18) {
-  console.log("You can vote.")
-}else{
-  console.log("You are not old enough to vote.")
-}
-</pre>
+if (onHand &lt;= 150) {
+  console.log(&quot;Place an order&quot;)
+} else {
+  console.log(&quot;No action needed&quot;)
+}</code></pre>
+<p>The choice of <code>&lt;=</code> rather than <code>&lt;</code> is not
+cosmetic: at exactly the reorder point you still want to order, and
+using the wrong one would quietly let an item sit at its trigger level
+without reordering.</p>
 <h3 data-number="5.2.2" id="logical-operators"><span
 class="header-section-number">5.2.2</span> Logical Operators</h3>
-<p>Logical operators let you combine multiple conditions or invert a
-condition. They&#8217;re essential when your program needs to check more than
-one thing at a time.</p>
+<p>Logical operators let you combine conditions or invert one. They&#8217;re
+essential when a decision depends on more than one thing.</p>
 <h4 data-number="5.2.2.1" id="and"><span
 class="header-section-number">5.2.2.1</span> AND
 (<code>&amp;&amp;</code>)</h4>
-<p>The entire expression is true only if both conditions are true.</p>
-<pre class="code" data-environment="none"> 
-if (score > 80 && isComplete) {
-  console.log("Great job!")
-}
-</pre>
+<p>The whole expression is true only if both conditions are true.</p>
+<pre class="javascript-example"><code>if (onHand &lt;= 150 &amp;&amp; supplierIsPreferred) {
+  console.log(&quot;Place an order with the preferred supplier&quot;)
+}</code></pre>
 <h4 data-number="5.2.2.2" id="or"><span
 class="header-section-number">5.2.2.2</span> OR (<code>||</code>)</h4>
-<p>The entire expression is true if either condition is true.</p>
-<pre class="code" data-environment="none"> 
-if (day === "Saturday" || day === "Sunday") {
-  console.log("It's the weekend!") 
-}
-</pre>
+<p>The whole expression is true if either condition is true.</p>
+<pre class="javascript-example"><code>if (isStockedOut || isOverstocked) {
+  console.log(&quot;Flag this item for review&quot;)
+}</code></pre>
 <h4 data-number="5.2.2.3" id="not"><span
 class="header-section-number">5.2.2.3</span> NOT (<code>!</code>)</h4>
 <p>Flips a boolean value.</p>
-<pre class="code" data-environment="none"> 
-if (!isActive) {
-  console.log("The account is inactive.")
-}
-</pre>
+<pre class="javascript-example"><code>if (!supplierIsPreferred) {
+  console.log(&quot;Use the backup supplier&quot;)
+}</code></pre>
 <p>Logical operators let you express more nuanced decisions, especially
 when working with real data from a spreadsheet.</p>
 <h3 data-number="5.2.3" id="using-operators-with-spreadsheet-data"><span
 class="header-section-number">5.2.3</span> Using Operators With
 Spreadsheet Data</h3>
 <p>Apps Script is often used to read values from cells and evaluate
-them. For example:</p>
-<pre class="code" data-environment="none"> 
-function categorizeScore() {
+them. A common operations decision is sorting items into classes by how
+much money they tie up &#8212; an <strong>ABC classification</strong>. The
+idea, rooted in Pareto&#8217;s 80-20 rule, is to rank items by annual dollar
+volume (unit cost times annual demand) so the few high-value items get
+the closest watch and the many low-value ones get a lighter touch. This
+script reads an item&#8217;s annual dollar volume from A1 and writes its class
+into B1:</p>
+<pre class="javascript-example"><code>function classifyItem() {
   let sheet = SpreadsheetApp.getActiveSheet()
-  let cellA1 = sheet.getRange("A1")
-  let score = cellA1.getValue()
-  let cellB1 = sheet.getRange("B1")
+  let annualDollarVolume = sheet.getRange(&quot;A1&quot;).getValue()
+  let cell = sheet.getRange(&quot;B1&quot;)
 
-
-  if (score >= 90) {
-    cellB1 .setValue("Excellent")
-  } else if (score >= 70 && score < 90) {
-    cellB1 .setValue("Good")
+  if (annualDollarVolume &gt;= 50000) {
+    cell.setValue(&quot;A&quot;)
+  } else if (annualDollarVolume &gt;= 10000 &amp;&amp; annualDollarVolume &lt; 50000) {
+    cell.setValue(&quot;B&quot;)
   } else {
-    cellB1 .setValue("Needs Improvement")
+    cell.setValue(&quot;C&quot;)
   }
-}
-</pre>
-<p>Here you see comparison operators (<code>&gt;=</code>,
-<code>&lt;</code>) and a logical operator (<code>&amp;&amp;</code>)
-working together to classify the score.</p>
+}</code></pre>
+<p>Here comparison operators (<code>&gt;=</code>, <code>&lt;</code>) and
+a logical operator (<code>&amp;&amp;</code>) work together to classify
+the item. This is the simple, threshold-based version of ABC; the more
+rigorous method &#8212; sorting the whole catalog and walking down the
+cumulative dollar volume until you&#8217;ve covered 80%, then 95% &#8212; needs a
+way to process every item at once, which the next chapters provide.</p>
 <h3 data-number="5.2.4" id="why-these-operators-matter"><span
 class="header-section-number">5.2.4</span> Why These Operators
 Matter</h3>
-<p>Comparison and logical operators are the backbone of decision&#8209;making.
-They allow your scripts to:</p>
-<ul>
-<li>Validate input</li>
-<li>Categorize data</li>
-<li>Check multiple conditions at once</li>
-<li>Control the flow of your program</li>
-<li>Respond intelligently to spreadsheet values</li>
-</ul>
-<p>Once you&#8217;re comfortable with these operators, you&#8217;ll be able to write
-much more expressive and flexible logic, turning your Apps Script
-projects into tools that adapt to whatever data they encounter.</p>
-<button class="prompt" onclick="makePrompt(event, {level:2,types:[&#39;quiz&#39;,&#39;review&#39;,&#39;examples&#39;]})">
-Learn more with your own AI
-</button>
+<p>Comparison and logical operators are the backbone of decision-making.
+They let your scripts validate input, categorize data, check several
+conditions at once, control flow, and respond intelligently to
+spreadsheet values. Once you&#8217;re comfortable with them, you can write
+much more expressive logic &#8212; tools that adapt to whatever data they
+encounter.</p>
 <h2 data-number="5.3"
-id="realworld-examples-of-decisionmaking-in-apps-script"><span
-class="header-section-number">5.3</span> Real&#8209;World Examples of
-Decision&#8209;Making in Apps Script</h2>
+id="real-world-examples-of-decision-making-in-apps-script"><span
+class="header-section-number">5.3</span> Real-World Examples of
+Decision-Making in Apps Script</h2>
+<p>Let&#8217;s bring the pieces together with the two decisions the University
+Store makes most often: when to reorder an item, and how much attention
+each item deserves.</p>
+<h3 data-number="5.3.1" id="deciding-when-to-reorder"><span
+class="header-section-number">5.3.1</span> Deciding When to Reorder</h3>
+<p>A good reorder rule doesn&#8217;t look at on-hand stock alone &#8212; it looks at
+the <strong>inventory position</strong>: what&#8217;s on hand, plus what&#8217;s
+already on order, minus what&#8217;s owed to back-orders. Tracking the
+position keeps you from ordering twice while a shipment is already on
+the way. When the position drops to the reorder point or below, you
+place an order &#8212; for the EOQ of 479 we computed in the last chapter.</p>
+<pre class="javascript-example"><code>function reorderDecision() {
+  let sheet = SpreadsheetApp.getActiveSheet()
+  let onHand = sheet.getRange(&quot;B2&quot;).getValue()
+  let onOrder = sheet.getRange(&quot;C2&quot;).getValue()
+  let backorders = sheet.getRange(&quot;D2&quot;).getValue()
+
+  let inventoryPosition = onHand + onOrder - backorders
+  let reorderPoint = 150
+  let orderQuantity = 479
+
+  if (inventoryPosition &lt;= reorderPoint) {
+    sheet.getRange(&quot;E2&quot;).setValue(&quot;ORDER &quot; + orderQuantity)
+  } else {
+    sheet.getRange(&quot;E2&quot;).setValue(&quot;HOLD&quot;)
+  }
+}</code></pre>
+<p>Two details carry the whole policy. The comparison is
+<code>&lt;=</code>, not <code>&lt;</code>, so an item resting exactly at
+its reorder point still triggers an order. And the decision is made on
+inventory position, not on-hand, so an item that&#8217;s low on the shelf but
+has a delivery already inbound won&#8217;t set off a second, unnecessary
+order.</p>
+<h3 data-number="5.3.2" id="giving-each-item-the-right-attention"><span
+class="header-section-number">5.3.2</span> Giving Each Item the Right
+Attention</h3>
+<p>Not every item deserves the same scrutiny. ABC classification ranks
+items by annual dollar volume so the handful that tie up most of the
+money &#8212; the A items &#8212; get the closest watch, while the many low-value C
+items get a lighter touch. In a typical catalog the A items are roughly
+a fifth of the products but the bulk of the value, and the C items are
+about half the products but a small slice of it. You can let the class
+drive the policy so attention follows value:</p>
+<pre class="javascript-example"><code>function reviewPolicy() {
+  let sheet = SpreadsheetApp.getActiveSheet()
+  let itemClass = sheet.getRange(&quot;B2&quot;).getValue()
+  let inventoryPosition = sheet.getRange(&quot;C2&quot;).getValue()
+  let reorderPoint = sheet.getRange(&quot;D2&quot;).getValue()
+  let cell = sheet.getRange(&quot;E2&quot;)
+
+  if (itemClass === &quot;A&quot; &amp;&amp; inventoryPosition &lt;= reorderPoint) {
+    cell.setValue(&quot;Order now and review weekly&quot;)
+  } else if (itemClass === &quot;C&quot;) {
+    cell.setValue(&quot;Simple min-max; review quarterly&quot;)
+  } else {
+    cell.setValue(&quot;Standard review&quot;)
+  }
+}</code></pre>
+<p>Here an equality (<code>===</code>), a comparison
+(<code>&lt;=</code>), and a logical AND (<code>&amp;&amp;</code>) work
+together to turn a value class into an operating policy &#8212; exactly the
+kind of judgment a buyer makes by hand, now written down so it runs the
+same way every time.</p>
+<h3 data-number="5.3.3" id="from-one-item-to-the-whole-catalog"><span
+class="header-section-number">5.3.3</span> From One Item to the Whole
+Catalog</h3>
+<p>Each function here decides about a single item, but the University
+Store stocks hundreds. To run the same reorder check across every row of
+a catalog &#8212; and to compute ABC the rigorous way, by sorting the whole
+list and walking down it until the cumulative dollar volume crosses 80%
+and then 95% &#8212; you need a way to hold many items at once and step
+through them one by one. That is exactly what arrays and loops give you,
+and it&#8217;s where the next two chapters go.</p>
 <!--postEnd-->
               </div>
 </div>
@@ -830,11 +1180,11 @@ Decision&#8209;Making in Apps Script</h2>
 </footer><!-- #colophon -->
 </div><!-- #page -->
 
-<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/654365252-widgets.js"></script>
+<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/1531375970-widgets.js"></script>
 <script type='text/javascript'>
-window['__wavt'] = 'AAVkm1v6o68LtM8p7dD62geV9Fhm:1780161146652';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d1676106165289640444','//book1011.blogspot.com/2000/02/5.html','1676106165289640444');
-_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '1676106165289640444', 'title': 'book1011', 'url': 'https://book1011.blogspot.com/2000/02/5.html', 'canonicalUrl': 'https://book1011.blogspot.com/2000/02/5.html', 'homepageUrl': 'https://book1011.blogspot.com/', 'searchUrl': 'https://book1011.blogspot.com/search', 'canonicalHomepageUrl': 'https://book1011.blogspot.com/', 'blogspotFaviconUrl': 'https://book1011.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://book1011.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22book1011 - RSS\x22 href\x3d\x22https://book1011.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/1676106165289640444/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://book1011.blogspot.com/feeds/5258223483723817058/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/808bd92d1f954de8', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '5258223483723817058', 'pageName': '5. Making Decisions', 'pageTitle': 'book1011: 5. Making Decisions'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': '5. Making Decisions', 'description': 'monaco  5  Making Decisions \r 5.1  if ,\r else if , else \r Programs become truly useful when they can make decisions. Instead of\r running the...', 'url': 'https://book1011.blogspot.com/2000/02/5.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 5258223483723817058}}]);
-_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'mainblogsec', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/1053750561-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/828616780-lightbox_bundle.css'}, 'displayModeFull'));
+window['__wavt'] = 'AEUoTZqzd5e5sAp4nwonAg5VuRn5:1783705223017';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d1676106165289640444','//book1011.blogspot.com/2000/02/5.html','1676106165289640444');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '1676106165289640444', 'title': 'book1011', 'url': 'https://book1011.blogspot.com/2000/02/5.html', 'canonicalUrl': 'https://book1011.blogspot.com/2000/02/5.html', 'homepageUrl': 'https://book1011.blogspot.com/', 'searchUrl': 'https://book1011.blogspot.com/search', 'canonicalHomepageUrl': 'https://book1011.blogspot.com/', 'blogspotFaviconUrl': 'https://book1011.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://book1011.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22book1011 - RSS\x22 href\x3d\x22https://book1011.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/1676106165289640444/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://book1011.blogspot.com/feeds/5258223483723817058/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/c41031f1073f7cb9', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '5258223483723817058', 'pageName': '5. Making Decisions', 'pageTitle': 'book1011: 5. Making Decisions'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': '5. Making Decisions', 'description': 'monaco  5  Making Decisions \r 5.1  if, else if, else \r Programs become truly useful when they can make decisions. Instead of\r running the sa...', 'url': 'https://book1011.blogspot.com/2000/02/5.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 5258223483723817058}}]);
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'mainblogsec', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/3430761855-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/828616780-lightbox_bundle.css'}, 'displayModeFull'));
 </script>
 </body>
 </html>

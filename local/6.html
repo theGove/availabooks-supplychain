@@ -18,12 +18,44 @@
 <style id='page-skin-1' type='text/css'><!--
 :root {
 --font-zoom: 1;
+--page-bg: #f8fafc;
+--surface: #ffffff;
+--surface-soft: #f1f5f9;
+--surface-muted: #e2e8f0;
+--text: #172033;
+--text-muted: #64748b;
+--heading: #0f172a;
+--accent: #2563eb;
+--accent-strong: #1d4ed8;
+--accent-soft: #dbeafe;
+--danger: #dc2626;
+--warning: #fef3c7;
+--border: #dbe3ee;
+--shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+--shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+--shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.18);
+--radius-sm: 0.5rem;
+--radius-md: 0.85rem;
+--radius-lg: 1.35rem;
+}
+* {
+box-sizing: border-box;
+}
+html {
+scroll-behavior: smooth;
 }
 body {
-font-family: "Verdana", "Open Sans", "Roboto", "Helvetica Neue", Arial, sans-serif;
-font-weight: 300;
+margin: 0;
+min-height: 100vh;
+font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+font-weight: 400;
 font-style: normal;
 font-size: calc(1rem  * var(--font-zoom));
+line-height: 1.72;
+color: var(--text);
+background: var(--page-bg);
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
 }
 .module{
 display:none
@@ -37,10 +69,10 @@ cursor:pointer;
 user-select:none;
 }
 summary::marker {
-color: #888;
+color: var(--text-muted);
 }
 #msg-galley{
-position:fixed;gf
+position:fixed;
 top:0;
 right:0;
 height:100vh;
@@ -49,10 +81,10 @@ max-width:50%;
 z-index:12;
 background-color: transparent;
 pointer-events: none;
-padding: .5rem .5rem 0 0;
-font-family: "Roboto", serif;
+padding: 1rem 1rem 0 0;
+font-family: "Roboto", sans-serif;
 font-optical-sizing: auto;
-font-weight: 300;
+font-weight: 400;
 font-style: normal;
 font-variation-settings: "wdth" 100;
 }
@@ -60,42 +92,47 @@ font-variation-settings: "wdth" 100;
 position:absolute;
 top:calc(3px  * var(--font-zoom));
 right:calc(3px  * var(--font-zoom));
-padding:.05rem;
-background-color:red;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 1.25rem;
+height: 1.25rem;
+padding: 0;
+background-color:var(--danger);
 color: white;
-font-weight:500;
-font-size:calc(.5rem  * var(--font-zoom));
-height:calc(1rem  * var(--font-zoom));
+font-weight:700;
+font-size:calc(.7rem  * var(--font-zoom));
+border-radius: 999px;
 cursor:pointer;
 }
 .msg-dialog{
 position: relative;
-background-color:#eee;
-margin-bottom:.5rem;
+background-color:var(--surface);
+margin-bottom:.75rem;
 pointer-events: auto;
-border-radius:5px;
-border: 1px solid black;
+border-radius:var(--radius-md);
+border: 1px solid var(--border);
+box-shadow: var(--shadow-md);
+overflow: hidden;
 }
 .msg-button-{
 margin: 0 .5rem .5rem 0;
 }
 .msg-button-bar{
-background-color:#ddd;
+background-color:var(--surface-soft);
 text-align:center;
-padding:.5rem .5rem .5rem;
-border-radius:0 0 5px 5px;
+padding:.75rem;
+border-top: 1px solid var(--border);
 }
 .msg-title{
-background-color:darkblue;
-color:#eee;
-font-weight:500;
-border-radius:5px 5px 0 0;
-padding-left:.5rem;
+background:var(--accent);
+color:white;
+font-weight:700;
+padding:.55rem 2rem .55rem .85rem;
 }
 .msg-message{
-background-color:#eee;
-padding: .5rem;
-border-radius:0 0 5px 5px;
+background-color:var(--surface);
+padding: .85rem;
 }
 #page-data{
 display:none
@@ -105,70 +142,131 @@ top:0;
 left:-100px;
 position:fixed;
 display:none;
-background-color:#eee;
+background:var(--surface);
 padding:0;
 z-index:11;
-transition: .3s;
+transition: left .25s ease, box-shadow .25s ease;
 height:100vh;
-min-width:20vw;
+min-width:min(22rem, 88vw);
 max-width:75vw;
 overflow: auto;
+border-right: 1px solid var(--border);
+box-shadow: var(--shadow-lg);
 }
 #book-data{display:none}
 #menu-content{
-padding:.6rem;
+padding:1rem 1.25rem 2rem;
 }
 .menu-button{
-padding:.2rem 1rem 0 .5rem;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-width:2.4rem;
+height:2.4rem;
+padding:0 .6rem;
 cursor:pointer;
-color:#888;
+color:var(--text-muted);
+border-radius:999px;
+transition: background .18s ease, color .18s ease, transform .18s ease;
+vertical-align:middle;
+}
+.menu-button:hover{
+background:var(--accent-soft);
+color:var(--accent-strong);
+transform: translateY(-1px);
 }
 .menu-header{
 top:0;
 position:sticky;
-background-color:#eee;
+background:var(--surface);
 opacity:1;
 margin:0;
+padding:.45rem .6rem;
+border-bottom:1px solid var(--border);
+box-shadow: var(--shadow-sm);
+z-index:1;
+}
+#book-title{
+font-weight:700;
+letter-spacing:.02em;
 }
 #search-div{
-width:200px;
+width:100%;
 white-space: nowrap;
+margin-top: 1.5rem;
 }
 #search-div h6{
-margin:1rem 0 0 0;
-font-size:14px;
+margin:0 0 .45rem 0;
+font-size:.78rem;
+font-weight:700;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:var(--text-muted);
+}
+#search{
+width: calc(100% - 2.25rem);
+border:1px solid var(--border);
+border-radius:999px;
+padding:.55rem .85rem;
+font: inherit;
+font-size:.92rem;
+color:var(--text);
+background:var(--surface);
+box-shadow: var(--shadow-sm);
+outline:none;
+transition: border-color .18s ease, box-shadow .18s ease;
+}
+#search:focus{
+border-color:var(--accent);
+box-shadow:0 0 0 4px rgba(37, 99, 235, .13);
 }
 #search-button{
-padding-left:0;
+padding-left:.45rem;
+color:var(--accent);
+vertical-align:middle;
 }
 #search-results{
-font-size:12px;
+font-size:.86rem;
+margin-top: .85rem;
 }
 .search-result{
-margin-top:10px;
-padding:5px;
+margin-top:.65rem;
+padding:.75rem;
 cursor:pointer;
+border:1px solid var(--border);
+border-radius:var(--radius-sm);
+background:var(--surface);
+box-shadow: var(--shadow-sm);
+transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 .search-result:hover{
-background-color:white;
+background-color:#f8fbff;
+border-color:#bfdbfe;
+box-shadow:0 10px 24px rgba(37, 99, 235, .1);
+transform: translateY(-1px);
 }
 .search-result-title{
 font-weight:bold;
+color:var(--heading);
 }
 .search-result-line{
-margin:0 0 5px 10px;
+margin:.25rem 0 .35rem .75rem;
+color:var(--text-muted);
 }
 .search-term{
-background-color:yellow;
+background-color:var(--warning);
+border-radius:.2rem;
+padding:0 .15rem;
 }
 .chapter-result-link{
-color:black;
+color:var(--heading);
 }
 .toc-section-container{
-margin-left:.6rem;
+margin-left:.75rem;
 }
 .toc-text-container{
-margin-left:1.6rem;
+margin-left:1.25rem;
+color:var(--text-muted);
 }
 .chapter-section{
 margin-top: calc(3rem  * var(--font-zoom));
@@ -179,61 +277,84 @@ display:none
 }
 img{
 max-width:100%;
+height:auto;
+border-radius:var(--radius-md);
 }
 .entry-header{
 position:fixed;
 top:0;
 left: 0;
 width: 100%;
-transition:all 0.1s;
-padding: .1rem;
+transition:opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+padding: .35rem .75rem;
 -webkit-user-select: none; /* Safari */
 user-select: none; /* Standard syntax */
-background: rgba(200, 200, 200, 1.0);
+background: var(--surface);
+border-bottom:1px solid var(--border);
+box-shadow:var(--shadow-sm);
 z-index:10;
 }
 button.nav{
-border-radius:5px;
+border-radius:999px;
+border:1px solid var(--border);
+background:var(--surface);
+color:var(--accent);
+box-shadow: var(--shadow-md);
+width:2.8rem;
+height:2.8rem;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
 }
 .nav{
 position: fixed;
-bottom: 5px;
+bottom: 1rem;
 opacity:1.0;
-transition:all 0.6s;
+transition:opacity 0.35s ease, transform 0.18s ease, box-shadow 0.18s ease;
 pointer-events: all;
 }
+.nav:hover{
+transform: translateY(-2px);
+box-shadow: var(--shadow-lg);
+}
 .dim-button:hover{opacity: 1.0;}
-.dim-button{opacity: .2;}
+.dim-button{opacity: .35;}
 .dim-header:hover{opacity: 1.0;}
 .dim-header{opacity: 0;}
 #prior-button {
-left: 5px;
+left: 1rem;
 }
 #next-button {
-right: 5px;
+right: 1rem;
 }
 .span-link{
 cursor:pointer;
-color:green;
+color:var(--accent);
+font-weight:500;
 }
 .span-link:hover{
 text-decoration: underline;
-color:blue;
+color:var(--accent-strong);
 }
-a:link {color: green; text-decoration:none}
-a:visited {color: green;}
-a:hover {background-color: #ddd;}
-a:active {color: green;}
+a:link {color: var(--accent); text-decoration:none}
+a:visited {color: #4f46e5;}
+a:hover {background-color: var(--accent-soft); color: var(--accent-strong); border-radius:.25rem;}
+a:active {color: var(--accent-strong);}
 .book-title{
-margin-top: 5rem;
-font-size:calc(3rem  * var(--font-zoom));
+margin-top: 6rem;
+font-family:"Taviraj", Georgia, serif;
+font-size:clamp(2.4rem, 7vw, calc(4rem  * var(--font-zoom)));
+line-height:1.05;
 text-align: center;
-font-weight: bold;
+font-weight: 700;
+color:var(--heading);
 }
 .book-author{
-margin-top: 2rem;
-font-size:calc(2rem  * var(--font-zoom));
+margin-top: 1rem;
+font-size:calc(1.45rem  * var(--font-zoom));
 text-align: center;
+color:var(--text-muted);
 }
 .book-toc{
 text-align: center;
@@ -246,41 +367,68 @@ display: inline-block;
 text-align:left;
 padding-left: 1rem;
 text-indent: -1rem;
-margin-bottom: 0.3rem;
+margin-bottom: 0.55rem;
 }
 .tool {
 cursor:pointer;
 font-size:calc(18px  * var(--font-zoom));
-font-weight:300;
+font-weight:400;
 vertical-align: middle;
 padding-left:.6rem;
-color:#666;
+color:var(--text-muted);
+transition: color .18s ease, transform .18s ease;
+}
+.tool:hover {
+color:var(--accent);
+transform: translateY(-1px);
 }
 .lead-in{
 margin-top:4rem;
 }
 .example, .indent, .category{
-margin:1rem 0 0 1rem;
+margin:1rem 0 0 1.1rem;
 }
 .category div:first-child{
-color:red;
+color:var(--danger);
+font-weight:700;
 }
 .example div:first-child{
-color:red;
+color:var(--danger);
 font-style: italic;
 }
 h1{
-font-size:1.5rem;
-color:#333;
+font-family:"Taviraj", Georgia, serif;
+font-size:clamp(1.35rem, 4vw, calc(2.1rem * var(--font-zoom)));
+line-height:1.18;
+color:var(--heading);
+font-weight:700;
+margin:0;
 }
 h2, h3{
-color:darkred;
+font-family:"Taviraj", Georgia, serif;
+color:var(--heading);
+line-height:1.24;
+letter-spacing:-.015em;
+}
+h2{
+font-size:clamp(1.55rem, 4vw, calc(2.15rem * var(--font-zoom)));
+margin:3rem 0 1rem;
+padding-top:.5rem;
+}
+h3{
+font-size:clamp(1.2rem, 3vw, calc(1.45rem * var(--font-zoom)));
+margin:2.25rem 0 .8rem;
+}
+.header-section-number{
+color:var(--accent);
+font-weight:700;
 }
 p{
 margin-top:0;
+margin-bottom:1.15rem;
 }
 p.vignette{
-color:red
+color:var(--danger)
 }
 .no-dot{
 list-style-type: none;
@@ -292,45 +440,166 @@ margin-bottom: 0.3rem;
 }
 audio{
 height:30px;
+width:100%;
+max-width:34rem;
 }
 div.post-body{
-max-width:900px;
+max-width:940px;
 margin:0 auto;
-padding:1rem;
-background-color:white;
-padding-top:2rem;
+padding:clamp(5.2rem, 7vw, 6.25rem) clamp(1.15rem, 4vw, 3.5rem) 4rem;
+background:transparent;
 }
 div.index-boxnbt{
-background-color:#eee;
+background:var(--surface);
+padding-bottom:2rem;
 }
 .material-symbols-outlined {
 font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
 font-size: 18px;
 line-height: 1;
 }
+blockquote{
+margin:1.75rem 0;
+padding:1rem 1.25rem 1rem 1.35rem;
+background:var(--surface-soft);
+border-left:.35rem solid var(--accent);
+border-radius:0 var(--radius-md) var(--radius-md) 0;
+color:#334155;
+}
+blockquote p:last-child{
+margin-bottom:0;
+}
+hr{
+height:1px;
+border:0;
+background:var(--border);
+margin:2.75rem 0;
+}
+ul, ol{
+padding-left:1.45rem;
+margin:0 0 1.25rem;
+}
+li{
+margin:.45rem 0;
+}
+code{
+font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+font-size:.92em;
+color:#0f766e;
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+border-radius:.35rem;
+padding:.08rem .32rem;
+}
+pre code,
+.sourceCode code{
+color:inherit;
+background:transparent;
+border:0;
+border-radius:0;
+padding:0;
+font-size:inherit;
+}
+pre,
+pre.javascript-code,
+pre.javascript-example,
+pre.spreadsheet,
+div.sourceCode pre{
+margin:1rem 0;
+padding:.75rem .85rem;
+overflow:auto;
+background:#0f172a;
+color:#dbeafe;
+border:1px solid rgba(148, 163, 184, .28);
+border-radius:var(--radius-md);
+box-shadow:var(--shadow-md);
+font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+font-size:.88rem;
+line-height:1.38;
+tab-size:2;
+white-space:pre;
+}
+div.sourceCode{
+margin:1rem 0;
+}
+div.sourceCode pre{
+margin:0;
+}
+.sourceCode .kw,
+.sourceCode .cf{
+color:#93c5fd;
+}
+.sourceCode .fu,
+.sourceCode .at{
+color:#67e8f9;
+}
+.sourceCode .st{
+color:#86efac;
+}
+.sourceCode .dv{
+color:#fbbf24;
+}
+.sourceCode .co{
+color:#94a3b8;
+font-style:italic;
+}
+table{
+display:block;
+width:max-content;
+max-width:100%;
+border-collapse:separate;
+border-spacing:0;
+margin:1.5rem 0 2rem;
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+border:1px solid var(--border);
+border-radius:var(--radius-md);
+box-shadow:var(--shadow-sm);
+background:var(--surface);
+}
+th,
+td{
+padding:.72rem .85rem;
+border-bottom:1px solid var(--border);
+text-align:left;
+vertical-align:top;
+white-space:nowrap;
+}
+th{
+font-size:.86rem;
+font-weight:700;
+color:var(--heading);
+background:var(--surface-soft);
+}
+tr:last-child td{
+border-bottom:0;
+}
+tr:nth-child(even) td{
+background:#f8fafc;
+}
 .monaco {
 width: 100%;
-margin: 1.25rem 0;
-border-radius: 10px;
+margin: 1.5rem 0;
+border-radius: var(--radius-md);
 overflow: hidden;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-border: 1px solid rgba(255, 255, 255, 0.06);
+box-shadow: var(--shadow-lg);
+border: 1px solid rgba(148, 163, 184, 0.22);
 }
 .monaco-bar {
 display: flex;
 align-items: center;
 justify-content: flex-end;
 gap: 2px;
-padding: 6px 10px;
-background: #2d2d2d;
+padding: 8px 10px;
+background: linear-gradient(180deg, #1f2937, #111827);
 border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .monaco-bar-label {
 flex: 1;
-font-family: 'Inter', sans-serif;
+font-family: "Roboto", sans-serif;
 font-size: 11px;
-font-weight: 500;
-color: #6e7681;
+font-weight: 700;
+color: #94a3b8;
 letter-spacing: 0.5px;
 text-transform: uppercase;
 padding-left: 4px;
@@ -413,12 +682,43 @@ font-size: 15px;
 pre.code {
 color: #a8ff78;
 background: #0d1117;
-padding: 12px 16px;
-margin: 1.25rem 0;
+padding: 1rem 1.15rem;
+margin: 1.35rem 0;
 font-size: 14px;
-border-radius: 8px;
+border-radius: var(--radius-md);
 border: 1px solid rgba(255, 255, 255, 0.07);
 overflow-x: auto;
+}
+@media (max-width: 700px) {
+body {
+font-size: calc(.98rem * var(--font-zoom));
+}
+#msg-galley {
+left: 0;
+right: 0;
+max-width: none;
+min-width: 0;
+padding: .75rem;
+}
+#menu {
+max-width: 92vw;
+}
+.entry-header {
+padding: .25rem .4rem;
+}
+div.post-body {
+padding-left: 1rem;
+padding-right: 1rem;
+}
+.nav {
+bottom: .75rem;
+}
+#prior-button {
+left: .75rem;
+}
+#next-button {
+right: .75rem;
+}
 }
 
 --></style>
@@ -482,7 +782,7 @@ overflow-x: auto;
     }    
 
   </script>
-<link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1676106165289640444&amp;zx=a6871b92-6a78-4e24-9444-f6b49cd57831' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1676106165289640444&amp;zx=a6871b92-6a78-4e24-9444-f6b49cd57831' rel='stylesheet'/></noscript>
+<link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1676106165289640444&amp;zx=71a99a4d-176b-4977-a83e-ca80eb55da2a' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1676106165289640444&amp;zx=71a99a4d-176b-4977-a83e-ca80eb55da2a' rel='stylesheet'/></noscript>
 <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
 <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 
@@ -532,26 +832,39 @@ Script</h2>
 <p>When you start automating Google Sheets with Apps Script, you quickly
 discover that working with <strong>one value at a time</strong> isn&#8217;t
 enough. Spreadsheets are built around <strong>lists</strong>,
-<strong>columns</strong>, and <strong>tables</strong>&#8212;all collections of
-values. To handle that kind of data, you need a structure that can hold
-many items at once. That&#8217;s exactly what arrays are designed for.</p>
+<strong>columns</strong>, and <strong>tables</strong> &#8212; all collections
+of values. To handle that kind of data, you need a structure that can
+hold many items at once. That&#8217;s exactly what arrays are designed
+for.</p>
+<p>This is where the University Store&#8217;s data outgrows single variables.
+Two collections will run through the chapter. The first is the clicker&#8217;s
+demand history &#8212; how many sold each month over the past year:</p>
+<pre class="javascript-example"><code>let monthlyDemand = [480, 240, 180, 300, 360, 120, 90, 540, 420, 240, 180, 450]</code></pre>
+<p>Those twelve numbers add up to the 3,600-a-year figure from Chapter
+4, but notice how they swing: a quiet summer (90 in July), then sharp
+spikes when each semester starts (540 in August, 480 in January). That
+movement is exactly why last month&#8217;s sales are a poor guide to next
+month&#8217;s &#8212; and why, in the next chapter, we&#8217;ll forecast from the whole
+series instead of any single point. The second collection is a slice of
+the store&#8217;s catalog, where each item is a row of its own values:</p>
+<pre class="javascript-example"><code>let catalog = [
+  [&quot;classroom clicker&quot;, 120, 64800],
+  [&quot;whiteboard marker&quot;, 480, 9000],
+  [&quot;USB drive&quot;, 75, 42000]
+]</code></pre>
 <p>Arrays let your scripts read, process, and transform groups of values
-efficiently. They&#8217;re the backbone of almost every meaningful spreadsheet
-automation you&#8217;ll write.</p>
+like these efficiently. They&#8217;re the backbone of almost every meaningful
+spreadsheet automation you&#8217;ll write.</p>
 <h3 data-number="6.1.1"
 id="arrays-hold-multiple-values-in-a-single-variable"><span
 class="header-section-number">6.1.1</span> Arrays Hold Multiple Values
 in a Single Variable</h3>
 <p>A normal variable stores one value:</p>
-<pre class="code"> 
-let city = "Denver"
-console.log(city)
-</pre>
+<pre class="javascript-example"><code>let lastMonth = 450
+console.log(lastMonth)</code></pre>
 <p>An array stores many:</p>
-<pre class="code"> 
-let cities = ["Denver", "Chicago", "Boston"]
-console.log(cities)
-</pre>
+<pre class="javascript-example"><code>let monthlyDemand = [480, 240, 180, 300, 360, 120, 90, 540, 420, 240, 180, 450]
+console.log(monthlyDemand)</code></pre>
 <p>This ability to group related values is essential when you&#8217;re dealing
 with spreadsheet data, which naturally comes in lists.</p>
 <h3 data-number="6.1.2"
@@ -566,229 +879,179 @@ read <strong>multiple cells</strong>, Apps Script returns an
 <li>The <strong>outer array</strong> contains all the rows you
 requested</li>
 </ul>
-<p>This structure mirrors the shape of the spreadsheet, but in
-JavaScript form. Once you understand arrays of arrays, you can process
-entire ranges at once instead of working cell by cell.</p>
+<p>This mirrors the shape of the spreadsheet, but in JavaScript form.
+Once you understand arrays of arrays, you can process an entire demand
+column or item catalog at once instead of working cell by cell.</p>
 <h3 data-number="6.1.3"
 id="arrays-make-your-scripts-faster-and-cleaner"><span
 class="header-section-number">6.1.3</span> Arrays Make Your Scripts
 Faster and Cleaner</h3>
-<p>Apps Script is at its best when you:</p>
-<ul>
-<li>Read a whole range into an array</li>
-<li>Process the data in memory</li>
-<li>Write the results back in one step</li>
-</ul>
-<p>This approach is dramatically faster than touching the spreadsheet
-repeatedly. Arrays make that possible.</p>
+<p>Apps Script is at its best when you read a whole range into an array,
+process the data in memory, and write the results back in one step. This
+is dramatically faster than touching the spreadsheet repeatedly. Arrays
+make it possible.</p>
 <h3 data-number="6.1.4"
 id="arrays-help-you-think-in-terms-of-data-not-cells"><span
 class="header-section-number">6.1.4</span> Arrays Help You Think in
 Terms of Data, Not Cells</h3>
-<p>Once you start using arrays, your mental model shifts:</p>
-<ul>
-<li>Instead of &#8220;read A2,&#8221; you think &#8220;get the second item in the
-list.&#8221;</li>
-<li>Instead of &#8220;look at each cell in column B,&#8221; you think &#8220;consider each
-row and look at index 1.&#8221;</li>
-<li>Instead of &#8220;write to row 10,&#8221; you think &#8220;update the tenth array
-element.&#8221;</li>
-</ul>
-<p>This mindset is how real applications handle data&#8212;by working with
-collections rather than isolated pieces.</p>
+<p>Once you start using arrays, your mental model shifts. Instead of
+&#8220;read A2,&#8221; you think &#8220;get the second item in the list.&#8221; Instead of &#8220;look
+at each cell in column B,&#8221; you think &#8220;consider each row and look at
+index 1.&#8221; Instead of &#8220;write to row 10,&#8221; you think &#8220;update the tenth
+array element.&#8221; This is how real applications handle data &#8212; by working
+with collections rather than isolated pieces.</p>
 <h3 data-number="6.1.5" id="what-youll-learn-in-this-chapter"><span
 class="header-section-number">6.1.5</span> What You&#8217;ll Learn in This
 Chapter</h3>
-<p>In the sections ahead, you&#8217;ll explore:</p>
-<ul>
-<li>How to create and use arrays</li>
-<li>How to work with arrays of arrays returned by Google Sheets</li>
-<li>Useful array methods for transforming data</li>
-<li>How to write arrays back into the sheet</li>
-<li>Real&#8209;world examples that turn raw spreadsheet ranges into meaningful
-results</li>
-</ul>
-<p>By the end of this chapter, arrays will feel natural and
-intuitive&#8212;and you&#8217;ll be ready to build scripts that handle real&#8209;world
-data with confidence and speed.</p>
+<p>In the sections ahead, you&#8217;ll explore how to create and use arrays,
+how to work with the arrays of arrays that Google Sheets returns, how to
+reach individual values inside them, and how to write arrays back into
+the sheet. By the end, arrays will feel natural &#8212; and you&#8217;ll be ready to
+handle the store&#8217;s demand history and catalog with confidence and
+speed.</p>
 <h2 data-number="6.2" id="understanding-arrays"><span
 class="header-section-number">6.2</span> Understanding Arrays</h2>
 <p>Arrays are one of the most important data structures you&#8217;ll use in
-JavaScript and Google Apps Script. If variables let you store a single
-value, arrays let you store <strong>many values in a single
-place</strong>&#8212;a list, a sequence, a collection. This becomes essential
-when you start working with spreadsheet data, because Sheets almost
-always gives you information in groups: rows, columns, or entire
-tables.</p>
+JavaScript and Apps Script. If variables let you store a single value,
+arrays let you store <strong>many values in a single place</strong> &#8212; a
+list, a sequence, a collection. This becomes essential with spreadsheet
+data, because Sheets almost always gives you information in groups:
+rows, columns, or whole tables.</p>
 <p>Think of an array as a row of labeled boxes, each holding a value.
 You can look inside any box, change what&#8217;s in it, or look at all of them
 one by one.</p>
 <h3 data-number="6.2.1" id="what-an-array-looks-like"><span
 class="header-section-number">6.2.1</span> What an Array Looks Like</h3>
 <p>Arrays are created using square brackets:</p>
-<pre class="code" data-environment="none">
-let colors = ["red", "green", "blue"]
-let scores = [95, 87, 72, 100]
-</pre>
-<p>Each item in the array has a position called an
-<strong>index</strong>. JavaScript starts counting at
-<strong>0</strong>, not 1:</p>
+<pre class="javascript-example"><code>let items = [&quot;classroom clicker&quot;, &quot;whiteboard marker&quot;, &quot;USB drive&quot;]
+let monthlyDemand = [480, 240, 180, 300, 360, 120, 90, 540, 420, 240, 180, 450]</code></pre>
+<p>Each item has a position called an <strong>index</strong>. JavaScript
+starts counting at <strong>0</strong>, not 1:</p>
 <ul>
-<li><code>colors[0]</code> &#8594; <code>"red"</code></li>
-<li><code>colors[1]</code> &#8594; <code>"green"</code></li>
-<li><code>colors[2]</code> &#8594; <code>"blue"</code></li>
+<li><code>monthlyDemand[0]</code> &#8594; <code>480</code> (January)</li>
+<li><code>monthlyDemand[1]</code> &#8594; <code>240</code> (February)</li>
+<li><code>monthlyDemand[7]</code> &#8594; <code>540</code> (August, the
+semester-start spike)</li>
 </ul>
-<p>This &#8220;zero&#8209;based indexing&#8221; is standard in most programming
+<p>This &#8220;zero-based indexing&#8221; is standard in most programming
 languages.</p>
 <h3 data-number="6.2.2" id="accessing-and-changing-array-values"><span
 class="header-section-number">6.2.2</span> Accessing and Changing Array
 Values</h3>
 <p>You can read a value by referencing its index:</p>
-<pre class="code" data-environment="none">
-let firstColor = colors[0]
-</pre>
+<pre class="javascript-example"><code>let january = monthlyDemand[0]</code></pre>
 <p>You can also change a value:</p>
-<pre class="code" data-environment="none">
-colors[1] = "yellow"   // replaces "green"
-</pre>
-<p>Or add new values:</p>
-<pre class="code" data-environment="none">
-colors.push("purple")
-</pre>
-<p>Arrays grow as needed&#8212;you don&#8217;t have to declare their size ahead of
+<pre class="javascript-example"><code>monthlyDemand[6] = 100   // revise July&#39;s demand to 100</code></pre>
+<p>Or add a new value &#8212; say, the first month of a new year:</p>
+<pre class="javascript-example"><code>monthlyDemand.push(500)</code></pre>
+<p>Arrays grow as needed &#8212; you don&#8217;t have to declare their size ahead of
 time.</p>
 <h3 data-number="6.2.3" id="arrays-can-hold-any-type-of-data"><span
 class="header-section-number">6.2.3</span> Arrays Can Hold Any Type of
 Data</h3>
 <p>Arrays aren&#8217;t limited to one type of value. You can mix strings,
-numbers, booleans, or even other arrays:</p>
-<pre class="code" data-environment="none">
-let mixed = ["Ava", 42, true]
-</pre>
-<p>In practice, though, it&#8217;s best to keep arrays consistent so your code
-stays predictable.</p>
+numbers, and booleans &#8212; which is exactly what a catalog row looks
+like:</p>
+<pre class="javascript-example"><code>let row = [&quot;classroom clicker&quot;, 120, 64800]</code></pre>
+<p>In practice, keep each kind of array consistent so your code stays
+predictable: a demand series is all numbers, a list of item names is all
+strings, and a catalog is a table of rows that each follow the same
+column pattern.</p>
 <h3 data-number="6.2.4" id="common-mistakes-to-watch-for"><span
 class="header-section-number">6.2.4</span> Common Mistakes to Watch
 For</h3>
-<p><strong>Off&#8209;by&#8209;one errors</strong><br />
-Because arrays start at index 0, beginners often try to access an index
-that doesn&#8217;t exist:</p>
-<pre class="code" data-environment="none">
-let items = ["a", "b", "c"]
-items[3]  // This will be undefined since there is no index 3
-</pre>
-<p><strong>Empty arrays</strong><br />
-An array with no items still exists, but accessing any index returns
-<code>undefined</code>:</p>
-<pre class="code" data-environment="none">
-let empty = []
-empty[0]  // undefined
-</pre>
-<p><strong>Forgetting that arrays are ordered</strong><br />
-If order matters&#8212;like rows in a spreadsheet&#8212;be careful when adding or
-removing items.</p>
+<p><strong>Off-by-one errors.</strong> Because arrays start at index 0,
+a twelve-month series has indexes 0 through 11. Reaching past the end
+returns <code>undefined</code>:</p>
+<pre class="javascript-example"><code>let demand = [480, 240, 180, 300, 360, 120, 90, 540, 420, 240, 180, 450]
+demand[12]   // undefined &#8212; there is no 13th month</code></pre>
+<p><strong>Empty arrays.</strong> An array with no items still exists,
+but accessing any index returns <code>undefined</code>:</p>
+<pre class="javascript-example"><code>let empty = []
+empty[0]   // undefined</code></pre>
+<p><strong>Forgetting that arrays are ordered.</strong> When order
+matters &#8212; and for a demand history it absolutely does, since January
+must stay January &#8212; be careful adding or removing items.</p>
 <h3 data-number="6.2.5" id="why-arrays-matter-in-apps-script-1"><span
 class="header-section-number">6.2.5</span> Why Arrays Matter in Apps
 Script</h3>
-<p>Arrays become essential when you start working with Google Sheets.
-For example:</p>
-<pre class="code" data-environment="none">
-let sheet = SpreadsheetApp.getActiveSheet()
-let range= sheet.getRange("A1:A10")
-let values= range.getValues()
-</pre>
-<p><code>getValues()</code> returns an array of arrays&#8212;an array of rows,
-where each row is itself an array. You&#8217;ll explore this in detail in the
-next section, but the key idea is this:</p>
-<p><strong>Arrays are how Apps Script represents spreadsheet
-data.</strong></p>
-<p>If you want to process multiple rows, clean up a column, or generate
-new output, you&#8217;ll be working with arrays.</p>
+<p>Arrays become essential the moment you work with Google Sheets. For
+example, reading the clicker&#8217;s twelve months of demand from a
+column:</p>
+<pre class="javascript-example"><code>let sheet = SpreadsheetApp.getActiveSheet()
+let range = sheet.getRange(&quot;B2:B13&quot;)
+let values = range.getValues()</code></pre>
+<p><code>getValues()</code> returns an array of arrays &#8212; an array of
+rows, where each row is itself an array. You&#8217;ll explore this in the next
+section, but the key idea is this: <strong>arrays are how Apps Script
+represents spreadsheet data.</strong> If you want to process a demand
+column or a catalog, you&#8217;ll be working with arrays.</p>
 <h3 data-number="6.2.6" id="what-you-can-do-with-arrays"><span
 class="header-section-number">6.2.6</span> What You Can Do With
 Arrays</h3>
 <p>By the end of this chapter, arrays will feel like second nature.
-You&#8217;ll use them to:</p>
-<ul>
-<li>Read data from a sheet into an array</li>
-<li>Transform values before writing them back</li>
-<li>Build new lists from existing ones</li>
-<li>Represent entire tables in memory</li>
-</ul>
-<p>Arrays are the gateway to handling real&#8209;world data at scale. Once
-you&#8217;re comfortable with them, you&#8217;ll be ready to tackle the arrays of
-arrays that Google Sheets gives you&#8212;and that&#8217;s where your Apps Script
-skills really start to shine.</p>
+You&#8217;ll use them to read a demand column or catalog into memory,
+transform values before writing them back, build new lists from existing
+ones, and represent an entire table at once. Arrays are the gateway to
+handling real data at scale &#8212; and they set up the arrays of arrays that
+Google Sheets hands you.</p>
 <h2 data-number="6.3" id="arrays-and-google-sheets"><span
 class="header-section-number">6.3</span> Arrays and Google Sheets</h2>
-<p>Arrays become truly useful once you start working with data from
-Google Sheets. Almost everything you read from a sheet&#8212;whether it&#8217;s a
-column, a row, or a whole table&#8212;comes back as an <strong>array</strong>.
+<p>Arrays become truly useful once you start working with data from a
+sheet. Almost everything you read &#8212; a column of demand, a row of item
+details, or a whole catalog &#8212; comes back as an <strong>array</strong>.
 And when you read more than one cell at a time, Apps Script gives you an
-<strong>array of arrays</strong>, where each inner array represents a
-single row of data.</p>
-<p>Understanding this structure is the key to writing fast, efficient
-spreadsheet automations.</p>
+<strong>array of arrays</strong>, where each inner array is a single
+row.</p>
 <h3 data-number="6.3.1" id="getvalue-vs.-getvalues"><span
 class="header-section-number">6.3.1</span> <code>getValue()</code>
 vs.&#160;<code>getValues()</code></h3>
-<p>These two methods behave very differently:</p>
-<ul>
-<li><strong><code>getValue()</code></strong> returns a <em>single
-value</em></li>
-<li><strong><code>getValues()</code></strong> returns an <em>array of
-arrays</em></li>
-</ul>
-<p>Example:</p>
-<pre class="code" data-environment="none">
-let sheet = SpreadsheetApp.getActiveSheet()
+<p>These two methods behave very differently.
+<strong><code>getValue()</code></strong> returns a <em>single
+value</em>; <strong><code>getValues()</code></strong> returns an
+<em>array of arrays</em>.</p>
+<pre class="javascript-example"><code>let sheet = SpreadsheetApp.getActiveSheet()
 
+let oneMonth = sheet.getRange(&quot;B2&quot;).getValue()        // one value
 
-let singleValue = sheet.getRange("A1").getValue()  // one value
-
-
-// array of arrays
-let manyValues = sheet.getRange("A1:A5").getValues() 
-</pre>
-<p>If you log <code>manyValues</code>, you&#8217;ll see something like:</p>
-<p>[<br />
-[&#8220;Ava&#8221;],<br />
-[&#8220;Jordan&#8221;],<br />
-[&#8220;Mia&#8221;],<br />
-[&#8220;Sam&#8221;],<br />
-[&#8220;Leo&#8221;]<br />
-]</p>
+let allMonths = sheet.getRange(&quot;B2:B13&quot;).getValues()  // array of arrays</code></pre>
+<p>If you log <code>allMonths</code>, you&#8217;ll see the demand column as
+rows:</p>
+<pre class="javascript-example"><code>[
+  [480],
+  [240],
+  [180],
+  [300]
+  // ...and so on, one row per month
+]</code></pre>
 <p>Each inner array represents one row from the range.</p>
 <h3 data-number="6.3.2" id="thinking-in-rows-and-columns"><span
 class="header-section-number">6.3.2</span> Thinking in Rows and
 Columns</h3>
-<p>When you read a range like <code>"A1:C1"</code>, you get <strong>one
+<p>When you read a range like <code>"A2:C2"</code>, you get <strong>one
 row</strong>, represented as an array:</p>
-<p>[&#8220;Ava&#8221;, &#8220;Smith&#8221;, 28]</p>
-<p>When you read <code>"A1:C3"</code>, you get <strong>three
+<pre class="javascript-example"><code>[&quot;classroom clicker&quot;, 120, 64800]</code></pre>
+<p>When you read <code>"A2:C4"</code>, you get <strong>three
 rows</strong>, represented as an array of arrays:</p>
-<p>[<br />
-[&#8220;Ava&#8221;, &#8220;Smith&#8221;, 28],<br />
-[&#8220;Jordan&#8221;, &#8220;Lee&#8221;, 31],<br />
-[&#8220;Mia&#8221;, &#8220;Chen&#8221;, 25]<br />
-]</p>
-<p>This structure mirrors the spreadsheet:</p>
-<ul>
-<li>Outer array &#8594; all rows</li>
-<li>Inner arrays &#8594; each row</li>
-<li>Items inside inner arrays &#8594; each cell in that row</li>
-</ul>
-<p>Once you see the pattern, it becomes intuitive.</p>
+<pre class="javascript-example"><code>[
+  [&quot;classroom clicker&quot;, 120, 64800],
+  [&quot;whiteboard marker&quot;, 480, 9000],
+  [&quot;USB drive&quot;, 75, 42000]
+]</code></pre>
+<p>This structure mirrors the spreadsheet: the outer array is all the
+rows, the inner arrays are each row, and the items inside each inner
+array are the cells in that row. Once you see the pattern, it becomes
+intuitive.</p>
 <h3 data-number="6.3.3" id="extracting-values"><span
 class="header-section-number">6.3.3</span> Extracting Values</h3>
-<p>In the next chapter, we&#8217;ll see how to use something called a &#8220;loop&#8221;
-to extract values from an array in an elegant way, but for now, let&#8217;s
-see how to refer to individual values in an array of arrays. Suppose you
-had a spreadsheet with the following data:</p>
+<p>In the next chapter we&#8217;ll use a &#8220;loop&#8221; to walk through an array
+elegantly, but for now let&#8217;s see how to reach individual values in an
+array of arrays. Suppose the store&#8217;s catalog sits in a sheet like
+this:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;"></th>
+<th></th>
 <th>A</th>
 <th>B</th>
 <th>C</th>
@@ -796,157 +1059,118 @@ had a spreadsheet with the following data:</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">1</td>
-<td>Ada</td>
-<td>Lovelace</td>
-<td>1815</td>
+<td>2</td>
+<td>classroom clicker</td>
+<td>120</td>
+<td>64800</td>
 </tr>
 <tr>
-<td style="text-align: left;">2</td>
-<td>Charles</td>
-<td>Babbage</td>
-<td>1791</td>
+<td>3</td>
+<td>whiteboard marker</td>
+<td>480</td>
+<td>9000</td>
 </tr>
 <tr>
-<td style="text-align: left;">3</td>
-<td>Mary</td>
-<td>Sommerville</td>
-<td>1780</td>
+<td>4</td>
+<td>USB drive</td>
+<td>75</td>
+<td>42000</td>
 </tr>
 </tbody>
 </table>
-<p>If you were to execute this statement:</p>
-<pre class="code" data-environment="none">
-let data = sheet.getRange("A1:C3").getValues()
-</pre>
-<p>you would have a variable named &#8220;data&#8221; containing an array of arrays
-that looks as follows:</p>
-<p>[<br />
-[&#8220;Ada&#8221;, &#8220;Lovelace&#8221;, 1815],<br />
-[&#8220;Charles&#8221;, &#8220;Babbage&#8221;, 1791],<br />
-[&#8220;Mary&#8221;, &#8220;Sommerville&#8221;, 1780]<br />
-]</p>
-<p>Here is one approach to read the data from the first row into
-individual variables</p>
-<pre class="code" data-environment="none">
-let data = sheet.getRange("A1:C3").getValues()
+<p>If you run this statement:</p>
+<pre class="javascript-example"><code>let catalog = sheet.getRange(&quot;A2:C4&quot;).getValues()</code></pre>
+<p>you&#8217;ll have a variable <code>catalog</code> holding an array of
+arrays:</p>
+<pre class="javascript-example"><code>[
+  [&quot;classroom clicker&quot;, 120, 64800],
+  [&quot;whiteboard marker&quot;, 480, 9000],
+  [&quot;USB drive&quot;, 75, 42000]
+]</code></pre>
+<p>Here&#8217;s one way to pull the first row into individual variables:</p>
+<pre class="javascript-example"><code>let catalog = sheet.getRange(&quot;A2:C4&quot;).getValues()
 
-let firstRow = data[0]         // ["Ada", "Lovelace", 1815]
-let firstName = firstRow[0]     // "Ada"
-let lastName = firstRow[1]      // "Lovelace"
-let age = firstRow[2]           // 1815
-</pre>
-<p>In this example, we assign a variable named &#8220;firstRow&#8221; to the first
-value in the &#8220;data&#8221; array. That value is itself an array, holding the
-values Ada, Lovelace, and 1815. Then use the &#8220;firstRow&#8221; variable to
-access individual values. However, we can accomplish the same result
-without the intermediated variable (firstRow) as follows:</p>
-<pre class="code" data-environment="none">
-let data = sheet.getRange("A1:C3").getValues()
+let firstRow = catalog[0]              // [&quot;classroom clicker&quot;, 120, 64800]
+let item = firstRow[0]                 // &quot;classroom clicker&quot;
+let onHand = firstRow[1]               // 120
+let annualDollarVolume = firstRow[2]   // 64800</code></pre>
+<p>We assign <code>firstRow</code> to the first element of
+<code>catalog</code>. That element is itself an array, holding the item,
+its on-hand quantity, and its annual dollar volume. We can reach the
+same values without the intermediate variable:</p>
+<pre class="javascript-example"><code>let catalog = sheet.getRange(&quot;A2:C4&quot;).getValues()
 
-let firstName = data[0][0]    // "Ada"
-let lastName = data[0][1]     // "Lovelace"
-let age = data[0][2]          // 1815
-</pre>
-<p>Similarly, you can pull out a single column by accessing the first
-element of each inner array:</p>
-<pre class="code" data-environment="none">
-let data = sheet.getRange("A1:A3").getValues()
+let item = catalog[0][0]                 // &quot;classroom clicker&quot;
+let onHand = catalog[0][1]               // 120
+let annualDollarVolume = catalog[0][2]   // 64800</code></pre>
+<p>Similarly, you can pull a single column &#8212; say, every item name &#8212; by
+reading the first element of each inner array:</p>
+<pre class="javascript-example"><code>let catalog = sheet.getRange(&quot;A2:C4&quot;).getValues()
 
-let first = data[0][0]     // Ada
-let second = data[1][0]    // Charles
-let third = data[2][0]     // Mary
-</pre>
-<p>You&#8217;re simply navigating the structure&#8212;outer array first, then inner
-array.</p>
+let first = catalog[0][0]    // classroom clicker
+let second = catalog[1][0]   // whiteboard marker
+let third = catalog[2][0]    // USB drive</code></pre>
+<p>You&#8217;re simply navigating the structure &#8212; outer array first, then
+inner array.</p>
 <h3 data-number="6.3.4" id="why-this-matters"><span
 class="header-section-number">6.3.4</span> Why This Matters</h3>
 <p>Arrays are the format Google Sheets uses to give you data. Once you
-understand how to read and access values inside arrays of arrays, you
-can:</p>
-<ul>
-<li>Work with entire ranges at once</li>
-<li>Extract specific rows or columns</li>
-<li>Prepare data for later transformation</li>
-<li>Build scripts that handle more than one cell at a time</li>
-</ul>
-<p>This sets the stage for everything that comes next. Soon you&#8217;ll learn
-how to transform these arrays, reshape them, and prepare them for
-writing back into the sheet.</p>
+can read and reach values inside arrays of arrays, you can work with an
+entire demand history or catalog at once, extract specific rows or
+columns, and prepare data for transformation. This sets the stage for
+everything that comes next &#8212; soon you&#8217;ll reshape these arrays and write
+them back into the sheet.</p>
 <h2 data-number="6.4" id="writing-arrays-back-to-the-worksheet"><span
 class="header-section-number">6.4</span> Writing Arrays Back to the
 Worksheet</h2>
-<p>Now that you&#8217;ve seen how Google Sheets gives you data as arrays (and
-arrays of arrays), the next step is learning how to
-<strong>write</strong> data back into the sheet. This is where arrays
-become truly powerful: you can prepare all your data in memory and then
-write it to the spreadsheet in a single, efficient operation.</p>
-<p>Apps Script provides two main methods for writing values:</p>
-<ul>
-<li><strong><code>setValue()</code></strong> &#8212; writes a <em>single</em>
-value</li>
-<li><strong><code>setValues()</code></strong> &#8212; writes an <em>array of
-arrays</em></li>
-</ul>
-<p>Since this chapter focuses on arrays, we&#8217;ll work with
+<p>Now that you&#8217;ve seen how Sheets gives you data as arrays, the next
+step is writing data back. This is where arrays become truly powerful:
+you can prepare everything in memory and write it to the spreadsheet in
+a single, efficient operation. Apps Script provides two methods:
+<strong><code>setValue()</code></strong> writes a <em>single</em> value,
+and <strong><code>setValues()</code></strong> writes an <em>array of
+arrays</em>. Since this chapter is about arrays, we&#8217;ll work with
 <code>setValues()</code>.</p>
 <h3 data-number="6.4.1" id="writing-a-single-row-one-inner-array"><span
 class="header-section-number">6.4.1</span> Writing a Single Row (One
 Inner Array)</h3>
-<p>If you want to write one row of data, you pass a single inner array.
-For example, using the row:</p>
-<p>[&#8220;Ada&#8221;, &#8220;Lovelace&#8221;, 1815]</p>
-<p>You can write it like this:</p>
-<pre class="code" data-environment="none">
-function writeOneRow() {
+<p>To write one row, you pass a single inner array. Using a catalog
+row:</p>
+<pre class="javascript-example"><code>function writeOneRow() {
   let sheet = SpreadsheetApp.getActiveSheet()
-  let row = ["Ada", "Lovelace", 1815]
+  let row = [&quot;classroom clicker&quot;, 120, 64800]
 
-  sheet.getRange("A1:C1").setValues([row])
-}
-</pre>
+  sheet.getRange(&quot;A2:C2&quot;).setValues([row])
+}</code></pre>
 <p>Notice that <code>setValues()</code> expects an <strong>array of
-arrays</strong>, even if you&#8217;re only writing one row. That&#8217;s why we wrap
-<code>row</code> in another pair of brackets.</p>
+arrays</strong>, even for one row. That&#8217;s why we wrap <code>row</code>
+in another pair of brackets.</p>
 <h3 data-number="6.4.2"
 id="writing-multiple-rows-an-array-of-arrays"><span
 class="header-section-number">6.4.2</span> Writing Multiple Rows (An
 Array of Arrays)</h3>
-<p>Here&#8217;s the full dataset as an array of arrays:</p>
-<p>[<br />
-[&#8220;Ada&#8221;, &#8220;Lovelace&#8221;, 1815],<br />
-[&#8220;Charles&#8221;, &#8220;Babbage&#8221;, 1791],<br />
-[&#8220;Mary&#8221;, &#8220;Sommerville&#8221;, 1780]<br />
-]</p>
-<p>This structure is already perfect for <code>setValues()</code>. Each
-inner array is a row, and the outer array contains all the rows.</p>
-<p>To write all three rows into the sheet:</p>
-<pre class="code" data-environment="none">
-function writeManyRows() {
+<p>This is also how you&#8217;d write the result of a calculation back to the
+sheet &#8212; for instance, a reorder status for each item:</p>
+<pre class="javascript-example"><code>function writeReorderStatus() {
   let sheet = SpreadsheetApp.getActiveSheet()
 
-  let data = [
-    ["Ada", "Lovelace", 1815],
-    ["Charles", "Babbage", 1791],
-    ["Mary", "Sommerville", 1780]
+  let results = [
+    [&quot;classroom clicker&quot;, &quot;Reorder&quot;],
+    [&quot;whiteboard marker&quot;, &quot;Healthy&quot;],
+    [&quot;USB drive&quot;, &quot;Reorder&quot;]
   ]
 
-  sheet.getRange("A1:C3").setValues(data)
-}
-</pre>
-<p>As long as the range size matches the array size (3 rows &#215; 3
-columns), Apps Script writes everything in one step.</p>
+  sheet.getRange(&quot;E2:F4&quot;).setValues(results)
+}</code></pre>
+<p>Each inner array is a row, and the outer array holds all the rows. As
+long as the range size matches the array size (3 rows &#215; 2 columns here),
+Apps Script writes everything in one step.</p>
 <h3 data-number="6.4.3" id="why-this-matters-1"><span
 class="header-section-number">6.4.3</span> Why This Matters</h3>
-<p>Writing data with <code>setValues()</code> is:</p>
-<ul>
-<li><strong>Fast</strong> &#8212; one operation instead of many</li>
-<li><strong>Clean</strong> &#8212; your script stays simple and readable</li>
-<li><strong>Reliable</strong> &#8212; the structure of your array matches the
-structure of the sheet</li>
-</ul>
-<p>This is the preferred way to write any non&#8209;trivial amount of data
-back into Google Sheets.</p>
+<p>Writing data with <code>setValues()</code> is fast (one operation
+instead of many), clean (your script stays simple and readable), and
+reliable (the array&#8217;s structure matches the sheet&#8217;s). It&#8217;s the preferred
+way to write any non-trivial amount of data back into Google Sheets.</p>
 <h3 data-number="6.4.4" id="a-helpful-pattern-to-remember"><span
 class="header-section-number">6.4.4</span> A Helpful Pattern to
 Remember</h3>
@@ -956,8 +1180,14 @@ Remember</h3>
 <li>Select a range with the same dimensions</li>
 <li>Call <code>setValues()</code></li>
 </ol>
-<p>This pattern is the foundation of efficient spreadsheet
-automation.</p>
+<p>This pattern is the foundation of efficient spreadsheet automation &#8212;
+and notice what&#8217;s still missing. We can now hold the whole demand
+history and the whole catalog in arrays, but we&#8217;ve only reached into
+them one element at a time, by hand. To actually compute a forecast from
+twelve months of demand, or to run the reorder check on every item in
+the catalog, you need a way to step through an array automatically, one
+element after another. That is what loops do, and it&#8217;s where the next
+chapter begins.</p>
 <!--postEnd-->
               </div>
 </div>
@@ -978,11 +1208,11 @@ automation.</p>
 </footer><!-- #colophon -->
 </div><!-- #page -->
 
-<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/654365252-widgets.js"></script>
+<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/1531375970-widgets.js"></script>
 <script type='text/javascript'>
-window['__wavt'] = 'AAVkm1sWwKvux9Sh7B7Me-XsJgLn:1780161147004';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d1676106165289640444','//book1011.blogspot.com/2000/02/6.html','1676106165289640444');
-_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '1676106165289640444', 'title': 'book1011', 'url': 'https://book1011.blogspot.com/2000/02/6.html', 'canonicalUrl': 'https://book1011.blogspot.com/2000/02/6.html', 'homepageUrl': 'https://book1011.blogspot.com/', 'searchUrl': 'https://book1011.blogspot.com/search', 'canonicalHomepageUrl': 'https://book1011.blogspot.com/', 'blogspotFaviconUrl': 'https://book1011.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://book1011.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22book1011 - RSS\x22 href\x3d\x22https://book1011.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/1676106165289640444/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://book1011.blogspot.com/feeds/8265233259572144186/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/808bd92d1f954de8', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '8265233259572144186', 'pageName': '6. Arrays', 'pageTitle': 'book1011: 6. Arrays'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': '6. Arrays', 'description': 'monaco  6  Arrays \r 6.1  Why Arrays Matter in Apps\r Script \r When you start automating Google Sheets with Apps Script, you quickly\r discover...', 'url': 'https://book1011.blogspot.com/2000/02/6.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 8265233259572144186}}]);
-_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'mainblogsec', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/1053750561-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/828616780-lightbox_bundle.css'}, 'displayModeFull'));
+window['__wavt'] = 'AEUoTZp-j_WzQa7jOgzorbzauJve:1783705223783';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d1676106165289640444','//book1011.blogspot.com/2000/02/6.html','1676106165289640444');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '1676106165289640444', 'title': 'book1011', 'url': 'https://book1011.blogspot.com/2000/02/6.html', 'canonicalUrl': 'https://book1011.blogspot.com/2000/02/6.html', 'homepageUrl': 'https://book1011.blogspot.com/', 'searchUrl': 'https://book1011.blogspot.com/search', 'canonicalHomepageUrl': 'https://book1011.blogspot.com/', 'blogspotFaviconUrl': 'https://book1011.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://book1011.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22book1011 - RSS\x22 href\x3d\x22https://book1011.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/1676106165289640444/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22book1011 - Atom\x22 href\x3d\x22https://book1011.blogspot.com/feeds/8265233259572144186/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/c41031f1073f7cb9', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '8265233259572144186', 'pageName': '6. Arrays', 'pageTitle': 'book1011: 6. Arrays'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': '6. Arrays', 'description': 'monaco  6  Arrays \r 6.1  Why Arrays Matter in Apps\r Script \r When you start automating Google Sheets with Apps Script, you quickly\r discover...', 'url': 'https://book1011.blogspot.com/2000/02/6.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 8265233259572144186}}]);
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'mainblogsec', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/3430761855-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/828616780-lightbox_bundle.css'}, 'displayModeFull'));
 </script>
 </body>
 </html>
